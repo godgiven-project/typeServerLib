@@ -1,12 +1,10 @@
-# form-builder
+# TypeScript server
+
+`TypeScript server` Is a library for building fast API with TypeScript.TypeScript server makes without any framework and developed with Nodejs `HTTP`.
 
 ## Install dependency
 
-To install the dependency you should run this command:
-
-```bash
-yarn install
-```
+To install the dependency you should run this command: `yarn install`
 
 after that you can run there scripts to run the project:
 
