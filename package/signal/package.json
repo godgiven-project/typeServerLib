@@ -1,0 +1,17 @@
+{
+  "name": "@godgiven/signal",
+  "version": "0.0.0",
+  "description": "Typescript/Javascript signal message handeler",
+  "main": "./dist/index.js",
+  "author": "Godgiven",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "license": "MIT",
+  "dependencies": {
+    "jsonwebtoken": "^8.5.1",
+    "tslib": "^2.2.0"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^8.5.5"
+  }
+}

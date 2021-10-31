@@ -1,0 +1,13 @@
+{
+  "name": "@godgiven/type",
+  "version": "0.0.0",
+  "description": "Type of godgiven objects",
+  "main": "./dist/index.js",
+  "author": "Godgiven",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "license": "MIT",
+  "dependencies": {
+    "tslib": "^2.2.0"
+  }
+}

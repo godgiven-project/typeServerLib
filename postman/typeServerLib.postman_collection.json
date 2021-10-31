@@ -1,0 +1,66 @@
+{
+	"info": {
+		"_postman_id": "2b13c3ad-32e9-46e1-ad7e-ecf6eab9e182",
+		"name": "typeServerLib",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Test",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/{{version}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{version}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjogInRlc3QifQ.ZjaPq6Ow34G3cBXBU-eOE9IJzK0W5uWyI6BZC7RqpUU",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "localhost:5000"
+		},
+		{
+			"key": "version",
+			"value": "v1"
+		}
+	]
+}

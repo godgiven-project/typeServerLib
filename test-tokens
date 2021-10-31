@@ -1,0 +1,29 @@
+const secret: string | undefined = 'sssssss';
+const token2 = jwt.sign('{name: "test"}', secret);
+eyJhbGciOiJIUzI1NiJ9.e25hbWU6ICJ0ZXN0In0.91dNWp93vbDeIPmC4ntVCQKTtZdbKbWwq_nCbc1tSQg
+eyJhbGciOiJIUzI1NiJ9.e25hbWU6ICJ0ZXN0In0.91dNWp93vbDeIPmC4ntVCQKTtZdbKbWwq_nCbc1tSQg
+eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjogInRlc3QifQ.ZjaPq6Ow34G3cBXBU-eOE9IJzK0W5uWyI6BZC7RqpUU
+
+fetch('http://localhost:5000/', {
+   method: 'post', 
+   headers: new Headers({
+     'Authorization': 'Basic eyJhbGciOiJIUzI1NiJ9.e25hbWU6ICJ0ZXN0In0.91dNWp93vbDeIPmC4ntVCQKTtZdbKbWwq_nCbc1tSQg', 
+     'Content-Type': 'application/json'
+   }), 
+   body: 'A=1&B=2'
+ });
+
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.e25hbWU6ICJ0ZXN0In0.91dNWp93vbDeIPmC4ntVCQKTtZdbKbWwq_nCbc1tSQg");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("localhost:5000", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
