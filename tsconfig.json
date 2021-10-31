@@ -79,7 +79,7 @@
   "references": [
     {"path": "./package/type/"},
     {"path": "./api/"},
-    {"path": "./package/typeServer-vanilla/"},
+    {"path": "./package/type-server"},
     {"path": "./package/signal/"},
   ]
 }

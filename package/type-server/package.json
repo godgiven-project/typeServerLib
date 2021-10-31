@@ -1,7 +1,7 @@
 {
   "name": "@godgiven/type-server",
   "version": "0.0.0",
-  "description": "Demo for Rest full api server",
+  "description": "Rest full api server with http",
   "main": "./dist/index.js",
   "author": "Godgiven",
   "type": "module",
