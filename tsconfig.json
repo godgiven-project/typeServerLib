@@ -78,8 +78,8 @@
   "exclude": [],
   "references": [
     {"path": "./package/type/"},
-    {"path": "./api/"},
-    {"path": "./package/type-server"},
     {"path": "./package/signal/"},
+    {"path": "./package/type-server"},
+    {"path": "./api/"},
   ]
 }
