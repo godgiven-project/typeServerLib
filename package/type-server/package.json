@@ -2,10 +2,10 @@
   "name": "@godgiven/type-server",
   "version": "0.0.0",
   "description": "Rest full api server with http",
-  "main": "./dist/index.js",
+  "main": "index.js",
   "author": "Godgiven",
   "type": "module",
-  "types": "./dist/index.d.ts",
+  "types": "index.d.ts",
   "license": "MIT",
   "dependencies": {
     "debug": "^4.3.2",

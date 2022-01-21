@@ -75,7 +75,8 @@
     "forceConsistentCasingInFileNames": true,        /* Disallow inconsistently-cased references to the same file. */
   },
   "include": [ "src/**/*.ts" ],
-  "exclude": [ "src/**/*.d.ts" ],
+  "exclude": [ "node_modules" ],
+
   "references": [
     {"path": "./package/type/"},
     {"path": "./package/signal/"},
