@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "Test",
+			"name": "main-test",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -21,17 +21,40 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "test-bodyparser",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"test\": \"Godgiven\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/{{version}}/test",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{version}}",
+						"test"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"auth": {
-		"type": "bearer",
-		"bearer": [
-			{
-				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjogInRlc3QifQ.ZjaPq6Ow34G3cBXBU-eOE9IJzK0W5uWyI6BZC7RqpUU",
-				"type": "string"
-			}
-		]
+		"type": "bearer"
 	},
 	"event": [
 		{
@@ -56,7 +79,7 @@
 	"variable": [
 		{
 			"key": "host",
-			"value": "localhost:5000"
+			"value": "http://localhost:5000"
 		},
 		{
 			"key": "version",
