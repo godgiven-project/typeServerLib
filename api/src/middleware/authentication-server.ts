@@ -1,7 +1,19 @@
 import { ServerResponse } from 'http';
-import { requestType } from '@godgiven/type';
 import Debug from 'debug';
 import * as jwt from './json-web-token.js';
+
+import type { IncomingMessage } from 'http';
+
+export interface requestType extends IncomingMessage
+{
+  user?: {
+    fName: string;
+    lName: string;
+  };
+  server?: {
+    name: string;
+  };
+}
 
 const debug = Debug('auth');
 // define plugin using callbacks

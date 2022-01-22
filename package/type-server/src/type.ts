@@ -1,17 +1,4 @@
-import type { IncomingMessage } from 'http';
-
 export type methodType = 'GET' | 'POST';
-
-export interface requestType extends IncomingMessage
-{
-  user?: {
-    fName: string;
-    lName: string;
-  };
-  server?: {
-    name: string;
-  };
-}
 
 export interface ApiResponseInterface
 {

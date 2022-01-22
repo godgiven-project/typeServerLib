@@ -1,22 +1,21 @@
-import * as http from 'http';
-import * as jwt from 'jsonwebtoken';
+import { createServer } from 'http';
 import { readFileSync } from 'fs';
-import { requestType, methodType } from '@godgiven/type';
+import { methodType } from './type.js';
 import { dispatchSignal } from '@godgiven/signal';
+import type { IncomingMessage, ServerResponse, Server } from 'http';
 import debug from 'debug';
 
 export class App
 {
-  public app: http.Server;
+  public app: Server;
   public port: number = 5000;
   public version: string = 'v1';
-  public secretKey: jwt.Secret = '';
-  public middlewareList: Array<(req: requestType, res: http.ServerResponse) => requestType> = [];
-  public routeList: Record<string, (req: requestType, res: http.ServerResponse) => void> = {};
+  public middlewareList: Array<(req: IncomingMessage, res: ServerResponse) => IncomingMessage> = [];
+  public routeList: Record<string, (req: IncomingMessage, res: ServerResponse) => void> = {};
 
   constructor()
   {
-    this.app = http.createServer(async (req: requestType, res) =>
+    this.app = createServer(async (req, res) =>
     {
       // await authFunction(req, res);
       for (const middleware of this.middlewareList)
@@ -39,7 +38,7 @@ export class App
     });
   }
 
-  public register(method: methodType, path: string, page: (req: requestType, res: http.ServerResponse) => void): void
+  public register(method: methodType, path: string, page: (req: IncomingMessage, res: ServerResponse) => void): void
   {
     const url = `${method as string} /${this.version}${path}`;
     this.routeList[url] = page;
