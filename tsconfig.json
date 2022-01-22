@@ -78,7 +78,6 @@
   "exclude": [ "node_modules" ],
 
   "references": [
-    {"path": "./package/type/"},
     {"path": "./package/signal/"},
     {"path": "./package/type-server"},
     {"path": "./api/"},

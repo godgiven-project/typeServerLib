@@ -13,7 +13,6 @@
   },
   "devDependencies": {
     "@godgiven/type-server": "^0.0.0",
-    "@godgiven/type": "^0.0.0",
     "@types/debug": "^4.1.7",
     "@types/jsonwebtoken": "^8.5.5"
   }
