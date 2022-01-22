@@ -1,9 +1,6 @@
 import { App } from '@godgiven/type-server';
 import { authFunction } from './middleware/authentication-server.js';
 import { pageHome, pageTest } from './page/index.js';
-/**
- *
- */
 
 const app = new App();
 app.port = 5000;
