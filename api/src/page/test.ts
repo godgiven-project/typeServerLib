@@ -1,5 +1,5 @@
 import { ServerResponse } from 'http';
-import { requestType } from '@godgiven/type';
+import { requestType } from '../middleware/authentication-server';
 import { sendResponse, bodyParser } from '@godgiven/type-server';
 
 import Debug from 'debug';
@@ -15,6 +15,7 @@ export const pageTest = async (_request: requestType, response: ServerResponse):
     description: '..:: Welcome ::..',
     data: {
       app: await bodyParser(_request),
+      user: _request.server
     },
   });
 };
