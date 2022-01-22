@@ -1,5 +1,5 @@
 import { ServerResponse } from 'http';
-import { ApiResponseInterface } from '@godgiven/type';
+import { ApiResponseInterface } from './type.js';
 import { getSignalValue } from '@godgiven/signal';
 import Debug from 'debug';
 
