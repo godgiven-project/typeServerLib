@@ -6,15 +6,13 @@
   "author": "Godgiven",
   "type": "module",
   "types": "index.d.ts",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "dependencies": {
     "@godgiven/signal": "^0.0.1",
     "debug": "^4.3.3",
-    "jsonwebtoken": "^8.5.1",
     "tslib": "^2.2.0"
   },
   "devDependencies": {
-    "@types/debug": "^4.1.7",
-    "@types/jsonwebtoken": "^8.5.5"
+    "@types/debug": "^4.1.7"
   }
 }

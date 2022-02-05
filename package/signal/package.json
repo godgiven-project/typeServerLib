@@ -6,12 +6,8 @@
   "author": "Godgiven",
   "type": "module",
   "types": "index.d.ts",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "dependencies": {
-    "jsonwebtoken": "^8.5.1",
     "tslib": "^2.2.0"
-  },
-  "devDependencies": {
-    "@types/jsonwebtoken": "^8.5.5"
   }
 }
