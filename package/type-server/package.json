@@ -1,6 +1,6 @@
 {
   "name": "@godgiven/type-server",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Rest full api server with http",
   "main": "index.js",
   "author": "Godgiven",
@@ -8,8 +8,8 @@
   "types": "index.d.ts",
   "license": "MIT",
   "dependencies": {
-    "debug": "^4.3.2",
-    "@godgiven/signal": "^0.0.0",
+    "@godgiven/signal": "^0.0.1",
+    "debug": "^4.3.3",
     "jsonwebtoken": "^8.5.1",
     "tslib": "^2.2.0"
   },

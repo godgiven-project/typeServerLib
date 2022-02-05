@@ -1,18 +1,18 @@
 {
   "name": "@godgiven/api",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Rest full api server",
   "main": "dist/index.js",
   "author": "Godgiven",
   "type": "module",
   "private": true,
   "dependencies": {
-    "debug": "^4.3.2",
+    "debug": "^4.3.3",
     "jsonwebtoken": "^8.5.1",
     "tslib": "^2.2.0"
   },
   "devDependencies": {
-    "@godgiven/type-server": "^0.0.0",
+    "@godgiven/type-server": "^0.0.1",
     "@types/debug": "^4.1.7",
     "@types/jsonwebtoken": "^8.5.5"
   }
