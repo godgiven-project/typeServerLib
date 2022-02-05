@@ -1,6 +1,6 @@
 {
   "name": "@godgiven/api",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Rest full api server",
   "main": "dist/index.js",
   "author": "Godgiven",
@@ -12,7 +12,7 @@
     "tslib": "^2.2.0"
   },
   "devDependencies": {
-    "@godgiven/type-server": "^0.1.0",
+    "@godgiven/type-server": "^0.1.1",
     "@types/debug": "^4.1.7",
     "@types/jsonwebtoken": "^8.5.5"
   }
