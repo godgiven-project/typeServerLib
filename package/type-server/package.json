@@ -19,9 +19,6 @@
     "type": "git",
     "url": "https://github.com/godgiven-project/typeServerLib/tree/next/package/type-server"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "files": [
     "*.js",
     "*.d.ts.map",
@@ -29,4 +26,7 @@
     "*.md",
     "LICENSE"
   ],
+  "publishConfig": {
+    "access": "public"
+  }
 }
