@@ -7,14 +7,21 @@
   "type": "module",
   "types": "index.d.ts",
   "license": "Apache-2.0",
+  "dependencies": {
+    "tslib": "^2.2.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/godgiven-project/typeServerLib/tree/next/package/signal"
   },
+  "files": [
+    "*.js",
+    "*.d.ts.map",
+    "*.js.map",
+    "*.md",
+    "LICENSE"
+  ],
   "publishConfig": {
     "access": "public"
-  },
-  "dependencies": {
-    "tslib": "^2.2.0"
   }
 }
