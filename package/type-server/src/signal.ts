@@ -4,7 +4,7 @@ declare global
 {
   interface SignalList
   {
-    api: {
+    readonly api: {
       version: string;
     };
   }
