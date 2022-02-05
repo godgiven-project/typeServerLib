@@ -1,4 +1,8 @@
-import './signalList.js';
+declare global
+{
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface SignalList {}
+}
 
 type CallBackType = <SignalName extends keyof SignalList>(value: SignalList[SignalName]) => void;
 interface SignalListener
