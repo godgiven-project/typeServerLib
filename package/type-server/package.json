@@ -12,6 +12,10 @@
     "debug": "^4.3.3",
     "tslib": "^2.2.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/godgiven-project/typeServerLib/tree/next/package/type-server"
+  },
   "devDependencies": {
     "@types/debug": "^4.1.7"
   }
