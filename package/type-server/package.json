@@ -16,6 +16,9 @@
     "type": "git",
     "url": "https://github.com/godgiven-project/typeServerLib/tree/next/package/type-server"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
     "@types/debug": "^4.1.7"
   }
