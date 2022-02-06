@@ -15,8 +15,8 @@
     "s": "yarn serve",
     "c": "yarn clean",
     "cb": "yarn clean-build",
-    "p": "npm-run-all --sequential prepare-publish ver publish",
-    "pp": "npm-run-all --sequential prepare-publish ver-patch publish",
+    "p": "npm-run-all --sequential prepare-publish ver release",
+    "pp": "npm-run-all --sequential prepare-publish ver-patch release",
     "up": "yarn upgrade-interactive --latest && git status && bash -c 'read -p \"Continue ?\" -n 1'",
     "build": "npm-run-all lint build:*",
     "build:ts": "tsc --build",
@@ -33,7 +33,7 @@
     "ver": "lerna version --no-push && git push && git push --tags",
     "ver-patch": "lerna version patch --no-push && git push && git push --tags",
     "prepare-publish": "npm-run-all --sequential clean build:*",
-    "publish": "lerna publish from-package"
+    "release": "lerna publish from-package"
   },
   "dependencies": {
     "debug": "^4.3.3",
