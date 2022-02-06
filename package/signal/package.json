@@ -1,6 +1,6 @@
 {
   "name": "@godgiven/signal",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Typescript/Javascript signal message handeler",
   "main": "index.js",
   "author": "Godgiven",
