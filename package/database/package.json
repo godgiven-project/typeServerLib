@@ -1,0 +1,30 @@
+{
+  "name": "@godgiven/database",
+  "version": "0.1.2",
+  "description": "Typescript/Javascript middlewere for communicate to databases",
+  "main": "index.js",
+  "author": "Godgiven",
+  "type": "module",
+  "types": "index.d.ts",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@godgiven/util": "^0.1.2",
+    "@godgiven/json-file": "^0.1.2",
+    "tslib": "^2.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/godgiven-project/typeServerLib/tree/next/package/database"
+  },
+  "files": [
+    "*.js",
+    "*.js.map",
+    "*.d.ts",
+    "*.d.ts.map",
+    "*.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
