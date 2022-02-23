@@ -1,7 +1,7 @@
 {
   "name": "@godgiven/json-file",
   "version": "0.1.2",
-  "description": "Typescript/Javascript json-file util package",
+  "description": "Typescript/Javascript json file manager package",
   "main": "index.js",
   "author": "Godgiven",
   "type": "module",
