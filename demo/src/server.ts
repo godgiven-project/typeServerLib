@@ -5,7 +5,8 @@ import {
   pageTest,
   pageUtil,
   pageJsonFile,
-  pageDatabase
+  pageInsertDatabase,
+  pageFindAllDatabase
 } from './page/index.js';
 
 const app = new App();
@@ -16,7 +17,8 @@ app.middlewareList.push(authFunction);
 app.register('GET', '/', pageHome);
 app.register('GET', '/util', pageUtil);
 app.register('GET', '/json-file', pageJsonFile);
-app.register('GET', '/database', pageDatabase);
+app.register('GET', '/database-insert', pageInsertDatabase);
+app.register('GET', '/database-find-all', pageFindAllDatabase);
 app.register('GET', '/test', pageTest);
 app.register('GET', '', pageHome);
 
