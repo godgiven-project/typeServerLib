@@ -1,5 +1,6 @@
 import { createId } from '@godgiven/util/uuid.js';
-import { writeJsonFile } from '@godgiven/json-file';
+import { utcTimestamp } from '@godgiven/util/time.js';
+import { writeJsonFile, readJsonDirectory } from '@godgiven/json-file';
 
 interface QueryType extends Record<string, string> {}
 
@@ -27,13 +28,16 @@ export class Database
     this._scope = scope;
   }
 
-  insert(_type: string, _data: unknown, uid: string = createId()): unknown
+  insert(_type: string, _data: Record<string, unknown>, id: string = createId()): Record<string, unknown>
   {
+    _data._id = id;
+    _data._modified = utcTimestamp();
+    _data._created = utcTimestamp();
     void writeJsonFile(
-      `${this._scope.path}/${this._scope.name}/${_type}/${uid}.json`,
+      `${this._scope.path}/${this._scope.name}/${_type}/${id}.json`,
       _data
     );
-    return uid;
+    return _data;
   }
 
   delete(_type: string, _query: QueryType): unknown
@@ -51,8 +55,9 @@ export class Database
     return null;
   }
 
-  findAll(_type: string, _query: QueryType): unknown
+  async findAll(_type: string, _query?: QueryType): Promise<Array<Record<string, unknown>>>
   {
-    return null;
+    const data = await readJsonDirectory(`${this._scope.path}/${this._scope.name}/${_type}`, {});
+    return data;
   }
 }
