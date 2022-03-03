@@ -28,16 +28,32 @@ export class Database
     this._scope = scope;
   }
 
-  insert(_type: string, _data: Record<string, unknown>, id: string = createId()): Record<string, unknown>
+  async insert(_type: string, _data: Record<string, unknown>, id: string = createId()): Promise<true | Error>
   {
     _data._id = id;
     _data._modified = utcTimestamp();
     _data._created = utcTimestamp();
-    void writeJsonFile(
+    const file = await writeJsonFile(
       `${this._scope.path}/${this._scope.name}/${_type}/${id}.json`,
-      _data
+      _data,
+      false
     );
-    return _data;
+
+    if (file === true)
+    {
+      return true;
+    }
+    else
+    {
+      if (file.message === 'EEXIST')
+      {
+        return new Error('Record is exist');
+      }
+      else
+      {
+        return new Error('Insert is not successful');
+      }
+    }
   }
 
   delete(_type: string, _query: QueryType): unknown
