@@ -13,17 +13,31 @@ const Db = new Database({
 
 export const pageInsertDatabase = async (_request: requestType, response: ServerResponse): Promise<void> =>
 {
-  log('pageHome');
-  await Db.insert(
+  log('pageInsertDatabase');
+  const test = await Db.insert(
     'testTable',
-    { testFild: 'Everything is ok' }
+    { testFild: 'Everything is ok' },
+    'test'
   );
 
-  sendResponse(response, 200, {
-    ok: true,
-    description: '..:: Welcome ::..',
-    data: {
-      status: 'testFild insert to testTable in test Db.'
-    },
-  });
+  if (test !== true)
+  {
+    sendResponse(response, 200, {
+      ok: false,
+      description: '..:: Welcome ::..',
+      data: {
+        message: test.message
+      },
+    });
+  }
+  else
+  {
+    sendResponse(response, 200, {
+      ok: true,
+      description: '..:: Welcome ::..',
+      data: {
+        status: 'testFild insert to testTable in test Db.'
+      },
+    });
+  }
 };
