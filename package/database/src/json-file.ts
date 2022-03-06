@@ -1,6 +1,6 @@
 import { createId } from '@godgiven/util/uuid.js';
 import { utcTimestamp } from '@godgiven/util/time.js';
-import { writeJsonFile, readJsonDirectory } from '@godgiven/json-file';
+import { writeJsonFile, readJsonDirectory, readJsonFile } from '@godgiven/json-file';
 
 interface QueryType extends Record<string, string> {}
 
@@ -9,7 +9,7 @@ interface ScopeType
   name: string; // string without the slash
   path: string; // ./
   username?: string;
-  passworld?: string;
+  password?: string;
   port?: number;
 }
 
@@ -28,14 +28,14 @@ export class Database
     this._scope = scope;
   }
 
-  async insert(_type: string, _data: Record<string, unknown>, id: string = createId()): Promise<true | Error>
+  async insert(type: string, data: Record<string, unknown>, id: string = createId()): Promise<true | Error>
   {
-    _data._id = id;
-    _data._modified = utcTimestamp();
-    _data._created = utcTimestamp();
+    data._id = id;
+    data._modified = utcTimestamp();
+    data._created = utcTimestamp();
     const file = await writeJsonFile(
-      `${this._scope.path}/${this._scope.name}/${_type}/${id}.json`,
-      _data,
+      `${this._scope.path}/${this._scope.name}/${type}/${id}.json`,
+      data,
       false
     );
 
@@ -56,6 +56,56 @@ export class Database
     }
   }
 
+  async updateById(type: string, id: string | number, data: Record<string, unknown>): Promise<true | Error>
+  {
+    const old = await readJsonFile(`${this._scope.path}/${this._scope.name}/${type}/${id}.json`);
+    if (!(old instanceof Error))
+    {
+      data._modified = utcTimestamp();
+      const file = await writeJsonFile(
+        `${this._scope.path}/${this._scope.name}/${type}/${id}.json`,
+        {
+          ...old,
+          ...data
+        },
+        true
+      );
+
+      if (file === true)
+      {
+        return true;
+      }
+      else
+      {
+        return new Error('Update is not successful');
+      }
+    }
+    else
+    {
+      if (old.message === 'ENOENT')
+      {
+        return new Error('Record is not exist');
+      }
+      else
+      {
+        return new Error(old.message);
+      }
+    }
+  }
+
+  async findAll(type: string, _query?: QueryType): Promise<Array<Record<string, unknown>>>
+  {
+    const data = await readJsonDirectory(`${this._scope.path}/${this._scope.name}/${type}`);
+    if (!(data instanceof Error))
+    {
+      return data;
+    }
+    else
+    {
+      return [];
+    }
+  }
+
   delete(_type: string, _query: QueryType): unknown
   {
     return null;
@@ -69,11 +119,5 @@ export class Database
   find(_type: string, _query: QueryType): unknown
   {
     return null;
-  }
-
-  async findAll(_type: string, _query?: QueryType): Promise<Array<Record<string, unknown>>>
-  {
-    const data = await readJsonDirectory(`${this._scope.path}/${this._scope.name}/${_type}`, {});
-    return data;
   }
 }
