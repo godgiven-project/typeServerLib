@@ -11,12 +11,12 @@ const Db = new Database({
   path: './data',
 });
 
-export const pageInsertDatabase = async (_request: requestType, response: ServerResponse): Promise<void> =>
+export const pageInsertUniqueIdDatabase = async (_request: requestType, response: ServerResponse): Promise<void> =>
 {
   log('pageInsertDatabase');
   const test = await Db.insert(
     'testTable',
-    { testFild: 'Everything is ok' },
+    { testField: 'Everything is ok' },
     'test'
   );
 
@@ -36,7 +36,7 @@ export const pageInsertDatabase = async (_request: requestType, response: Server
       ok: true,
       description: '..:: Welcome ::..',
       data: {
-        status: 'testFild insert to testTable in test Db.'
+        status: 'testField insert to testTable in test Db.'
       },
     });
   }
