@@ -4,4 +4,6 @@ export * from './util.js';
 export * from './json-file.js';
 export * from './database-insert.js';
 export * from './database-insert-unique.js';
+export * from './database-update-by-id.js';
+export * from './database-find-by-id.js';
 export * from './database-find-all.js';

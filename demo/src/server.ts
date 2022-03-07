@@ -6,6 +6,9 @@ import {
   pageUtil,
   pageJsonFile,
   pageInsertDatabase,
+  pageInsertUniqueIdDatabase,
+  pageUpdateUniqueIdDatabase,
+  pageFindUniqueIdDatabase,
   pageFindAllDatabase
 } from './page/index.js';
 
@@ -18,6 +21,9 @@ app.register('GET', '/', pageHome);
 app.register('GET', '/util', pageUtil);
 app.register('GET', '/json-file', pageJsonFile);
 app.register('GET', '/database-insert', pageInsertDatabase);
+app.register('GET', '/database-insert-id', pageInsertUniqueIdDatabase);
+app.register('GET', '/database-update-id', pageUpdateUniqueIdDatabase);
+app.register('GET', '/database-find-id', pageFindUniqueIdDatabase);
 app.register('GET', '/database-find-all', pageFindAllDatabase);
 app.register('GET', '/test', pageTest);
 app.register('GET', '', pageHome);
