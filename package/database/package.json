@@ -1,18 +1,20 @@
 {
-  "name": "@godgiven/signal",
+  "name": "@godgiven/database",
   "version": "0.1.3",
-  "description": "Typescript/Javascript signal message handeler",
+  "description": "Typescript/Javascript middlewere for communicate to databases",
   "main": "index.js",
   "author": "Godgiven",
   "type": "module",
   "types": "index.d.ts",
   "license": "Apache-2.0",
   "dependencies": {
+    "@godgiven/json-file": "^0.1.3",
+    "@godgiven/util": "^0.1.3",
     "tslib": "^2.2.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/godgiven-project/typeServerLib/tree/next/package/signal"
+    "url": "https://github.com/godgiven-project/typeServerLib/tree/next/package/database"
   },
   "files": [
     "*.js",

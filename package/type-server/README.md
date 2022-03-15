@@ -1,13 +1,8 @@
-# TypeScript server
+# `@godgiven/type-server`
 
-`TypeScript server` Is a library for building fast API with TypeScript.
+A base server app with very simple routing and middleware. you can install type-server with:
 
-TypeScript server lib makes without any framework and developed with Nodejs `HTTP`.
-
-## Package List
-
-- `typeServer`: A base server app with very simple routing and middleware. you can install typeServer with `yarn add @godgiven/typeServer`.
-- `signal`: A library for communicate packages with together. you can install signal with `yarn add @godgiven/signal`.
+`yarn add @godgiven/type-server`
 
 ## Uses
 

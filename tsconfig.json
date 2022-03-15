@@ -80,6 +80,9 @@
   "references": [
     {"path": "./package/signal/"},
     {"path": "./package/type-server"},
-    {"path": "./api/"},
+    {"path": "./package/util"},
+    {"path": "./package/json-file"},
+    {"path": "./package/database"},
+    {"path": "./demo/"},
   ]
 }

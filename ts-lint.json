@@ -19,8 +19,8 @@
     "emitDecoratorMetadata": true
   },
   "include": [ 
-    "api/**/*.ts",
-    "package/**/*.ts" 
+    "package/**/*.ts",
+    "demo/**/*.ts"
   ],
   "exclude": [],
   "compileOnSave": false
