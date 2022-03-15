@@ -14,6 +14,8 @@
   "devDependencies": {
     "@godgiven/type-server": "^0.1.2",
     "@godgiven/util": "^0.1.2",
+    "@godgiven/json-file": "^0.1.2",
+    "@godgiven/database": "^0.1.2",
     "@types/debug": "^4.1.7",
     "@types/jsonwebtoken": "^8.5.8"
   }

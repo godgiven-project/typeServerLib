@@ -3,33 +3,30 @@ import { resolve } from 'path';
 /**
  *
  */
-export async function readJsonFile<T extends Record<string | number, unknown>>(path: string, defaultContent: T): Promise<T>
+export async function readJsonFile<T extends Record<string | number, unknown>>(path: string): Promise<Error | T>
 {
-  // Check the path is exsist
+  // Check the path is exist
   path = resolve(path);
   if (!existsSync(path))
   {
-    return defaultContent;
+    return new Error('NEXIST');
   }
 
-  // Try to read file
-  let fileContent: string;
-  try
+  // Read file
+  return fs.readFile(path, { encoding: 'utf-8' }).then((fileContent) =>
   {
-    fileContent = await fs.readFile(path, { encoding: 'utf-8' });
-  }
-  catch (err)
+    // Parse object
+    try
+    {
+      return JSON.parse(fileContent);
+    }
+    catch (err)
+    {
+      return new Error('invalid_json');
+    }
+  }).catch((e) =>
   {
-    throw new Error('read_file_error');
-  }
-
-  // Try to pars file
-  try
-  {
-    return JSON.parse(fileContent);
-  }
-  catch (err)
-  {
-    throw new Error('invalid_json');
-  }
+    // Handel error
+    return new Error(e.code);
+  });
 }

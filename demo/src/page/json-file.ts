@@ -9,9 +9,9 @@ const log = Debug('app/page/home');
 export const pageJsonFile = async (_request: requestType, response: ServerResponse): Promise<void> =>
 {
   log('pageHome');
-  const jsonAddres = './data/test.json';
-  await writeJsonFile(jsonAddres, { test: 'Every thing is ok' });
-  const json = await readJsonFile(jsonAddres, { description: 'it\'s not ok' });
+  const jsonAdders = './data/test.json';
+  await writeJsonFile(jsonAdders, { test: 'Every thing is ok' });
+  const json = await readJsonFile(jsonAdders);
   sendResponse(response, 200, {
     ok: true,
     description: '..:: Welcome ::..',
