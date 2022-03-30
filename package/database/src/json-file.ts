@@ -37,7 +37,11 @@ export class Database
    * @param {string} id the unique reference for Record
    * @returns {true | Record<string, unknown>} `true` if the insert was successful Else return a `Error Object`
    */
-  async insert(type: string, data: Record<string, unknown>, id: string = createId()): Promise<true | Error>
+  async insert(
+    type: string,
+    data: Record<string, unknown>,
+    id: string = createId()
+  ): Promise<true | Error>
   {
     data._id = id;
     data._modified = utcTimestamp();
@@ -62,6 +66,39 @@ export class Database
       {
         return new Error('Insert is not successful');
       }
+    }
+  }
+
+  /**
+   * For insert record data to table of database
+   *
+   * @param {string} type similar the table and structure
+   * @param {Object} data data of Record
+   * @param {string} id the unique reference for Record
+   * @returns {true | Record<string, unknown>} `true` if the insert was successful Else return a `Error Object`
+   */
+  async save(
+    type: string,
+    data: Record<string, unknown>,
+    id: string = createId()
+  ): Promise<true | Error>
+  {
+    data._id = id;
+    data._modified = utcTimestamp();
+    data._created = utcTimestamp();
+    const file = await writeJsonFile(
+       `${this._scope.path}/${this._scope.name}/${type}/${id}.json`,
+       data,
+       true
+    );
+
+    if (file === true)
+    {
+      return true;
+    }
+    else
+    {
+      return new Error('Insert is not successful');
     }
   }
 
@@ -112,11 +149,15 @@ export class Database
   /**
    *
    * @param {string} type similar the table and structure
-   * @param {string} id the unique reference for Record
    * @param {Record<string, unknown>} data any field that you want update
+   * @param {string} id the unique reference for Record
    * @returns {true | Error} `true` if the update was successful Else return a `Error Object`
    */
-  async updateById(type: string, id: string | number, data: Record<string, unknown>): Promise<true | Error>
+  async updateById(
+    type: string,
+    data: Record<string, unknown>,
+    id: string | number
+  ): Promise<true | Error>
   {
     const old = await readJsonFile(`${this._scope.path}/${this._scope.name}/${type}/${id}.json`);
     if (!(old instanceof Error))
