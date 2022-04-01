@@ -70,12 +70,12 @@ export class Database
   }
 
   /**
-   * For insert record data to table of database
+   * For save record data to table of database
    *
    * @param {string} type similar the table and structure
    * @param {Object} data data of Record
    * @param {string} id the unique reference for Record
-   * @returns {true | Record<string, unknown>} `true` if the insert was successful Else return a `Error Object`
+   * @returns {true | Record<string, unknown>} `true` if the save was successful Else return a `Error Object`
    */
   async save(
     type: string,
