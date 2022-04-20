@@ -23,11 +23,18 @@ export class App
         req = await middleware(req, res);
       }
       const url = `${req.method!} ${req.url!}`;
-      // console.log(url);
-      // console.log(Object.keys(this.routeList));
       if (url in this.routeList)
       {
-        this.routeList[url](req, res);
+        try
+        {
+          await this.routeList[url](req, res);
+        }
+        catch
+        {
+          res.writeHead(500, { 'Content-Type': 'application/json' });
+          debug('500');
+          res.end();
+        }
       }
       else
       {
@@ -48,7 +55,14 @@ export class App
   {
     this.app.addListener('error', (err) =>
     {
-      console.error(JSON.stringify(err));
+      if (err.message === 'EADDRINUSE')
+      {
+        console.log('Address in use, retrying...');
+      }
+      else
+      {
+        console.error(JSON.stringify(err));
+      }
       process.exit(1);
     });
 
