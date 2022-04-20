@@ -5,7 +5,7 @@ import { readJsonFile } from './read-json-file.js';
 /**
  *
  */
-export async function readJsonDirectory<T extends Record<string | number, unknown>>(path: string): Promise<T[] | Error>
+export async function readJsonDirectory<T extends Record<string | number, unknown>>(path: string): Promise<T[]>
 {
   // Check the path is exsist
   path = resolve(path);
@@ -27,16 +27,20 @@ export async function readJsonDirectory<T extends Record<string | number, unknow
   }
   catch (err)
   {
-    return new Error('read_file_list_error');
+    throw new Error('read_file_list_error');
   }
 
   // read all json file
   for (const file of fileList)
   {
-    const fileContent = await readJsonFile<T>(`${path}/${file}`);
-    if (!(fileContent instanceof Error))
+    try
     {
+      const fileContent = await readJsonFile<T>(`${path}/${file}`);
       fileContentList.push(fileContent);
+    }
+    catch
+    {
+      continue;
     }
   }
 
