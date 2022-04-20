@@ -14,29 +14,28 @@ const Db = new Database({
 export const pageUpdateUniqueIdDatabase = async (_request: requestType, response: ServerResponse): Promise<void> =>
 {
   log('pageUpdateDatabase');
-  const test = await Db.updateById(
-    'testTable',
-    { testField: 'Update was run' },
-    'test'
-  );
-
-  if (test !== true)
+  try
   {
-    sendResponse(response, 200, {
-      ok: false,
-      description: '..:: Welcome ::..',
-      data: {
-        message: test.message
-      },
-    });
-  }
-  else
-  {
+    await Db.updateById(
+      'testTable',
+      { testField: 'Update was run' },
+      'test'
+    );
     sendResponse(response, 200, {
       ok: true,
       description: '..:: Welcome ::..',
       data: {
         status: 'testRecord update to testTable in test Db.'
+      },
+    });
+  }
+  catch (error)
+  {
+    sendResponse(response, 200, {
+      ok: false,
+      description: '..:: Welcome ::..',
+      data: {
+        message: (error as Error).message
       },
     });
   }
