@@ -23,9 +23,7 @@ export const pageFindUniqueIdDatabase = async (_request: requestType, response: 
     sendResponse(response, 200, {
       ok: true,
       description: '..:: Welcome ::..',
-      data: {
-        status: test
-      },
+      data: test,
     });
   }
   catch (error)
