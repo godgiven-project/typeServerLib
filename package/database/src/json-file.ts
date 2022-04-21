@@ -139,7 +139,7 @@ export class Database
       }
       else
       {
-        throw new Error((error as Error).message);
+        throw error;
       }
     }
   }
@@ -185,7 +185,7 @@ export class Database
       }
       else
       {
-        throw new Error((error as Error).message);
+        throw error;
       }
     }
   }
