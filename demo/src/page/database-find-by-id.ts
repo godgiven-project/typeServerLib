@@ -14,28 +14,25 @@ const Db = new Database({
 export const pageFindUniqueIdDatabase = async (_request: requestType, response: ServerResponse): Promise<void> =>
 {
   log('pageUpdateDatabase');
-  const test = await Db.findById(
-    'testTable',
-    'test'
-  );
-
-  if (!(test instanceof Error))
+  try
   {
+    const test = await Db.findById(
+      'testTable',
+      'test'
+    );
     sendResponse(response, 200, {
       ok: true,
       description: '..:: Welcome ::..',
-      data: {
-        status: test
-      },
+      data: test,
     });
   }
-  else
+  catch (error)
   {
     sendResponse(response, 200, {
       ok: false,
       description: '..:: Welcome ::..',
       data: {
-        message: test.message
+        message: (error as Error).message
       },
     });
   }

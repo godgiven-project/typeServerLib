@@ -22,7 +22,7 @@ export class Database
   private readonly _scope: ScopeType;
 
   /**
-   * @param {Object} scope is config of database name and other salt.
+   * @param {object} scope is config of database name and other salt.
    */
   constructor(scope: ScopeType)
   {
@@ -33,7 +33,7 @@ export class Database
    * For insert record data to table of database
    *
    * @param {string} type similar the table and structure
-   * @param {Object} data data of Record
+   * @param {object} data data of Record
    * @param {string} id the unique reference for Record
    * @returns {true | Record<string, unknown>} `true` if the insert was successful Else return a `Error Object`
    */
@@ -41,30 +41,29 @@ export class Database
     type: string,
     data: Record<string, unknown>,
     id: string = createId()
-  ): Promise<true | Error>
+  ): Promise<void>
   {
     data._id = id;
     data._modified = utcTimestamp();
     data._created = utcTimestamp();
-    const file = await writeJsonFile(
-      `${this._scope.path}/${this._scope.name}/${type}/${id}.json`,
-      data,
-      false
-    );
 
-    if (file === true)
+    try
     {
-      return true;
+      await writeJsonFile(
+        `${this._scope.path}/${this._scope.name}/${type}/${id}.json`,
+        data,
+        false
+      );
     }
-    else
+    catch (error)
     {
-      if (file.message === 'EEXIST')
+      if ((error as Error).message === 'EEXIST')
       {
-        return new Error('Record is exist');
+        throw new Error('Record is exist');
       }
       else
       {
-        return new Error('Insert is not successful');
+        throw new Error('Insert is not successful');
       }
     }
   }
@@ -73,7 +72,7 @@ export class Database
    * For save record data to table of database
    *
    * @param {string} type similar the table and structure
-   * @param {Object} data data of Record
+   * @param {object} data data of Record
    * @param {string} id the unique reference for Record
    * @returns {true | Record<string, unknown>} `true` if the save was successful Else return a `Error Object`
    */
@@ -81,24 +80,23 @@ export class Database
     type: string,
     data: Record<string, unknown>,
     id: string = createId()
-  ): Promise<true | Error>
+  ): Promise<void>
   {
     data._id = id;
     data._modified = utcTimestamp();
     data._created = utcTimestamp();
-    const file = await writeJsonFile(
-       `${this._scope.path}/${this._scope.name}/${type}/${id}.json`,
-       data,
-       true
-    );
 
-    if (file === true)
+    try
     {
-      return true;
+      await writeJsonFile(
+        `${this._scope.path}/${this._scope.name}/${type}/${id}.json`,
+        data,
+        true
+      );
     }
-    else
+    catch
     {
-      return new Error('Insert is not successful');
+      throw new Error('Save is not successful');
     }
   }
 
@@ -109,12 +107,12 @@ export class Database
    */
   async findAll(type: string): Promise<Array<Record<string, unknown>>>
   {
-    const data = await readJsonDirectory(`${this._scope.path}/${this._scope.name}/${type}`);
-    if (!(data instanceof Error))
+    try
     {
+      const data = await readJsonDirectory(`${this._scope.path}/${this._scope.name}/${type}`);
       return data;
     }
-    else
+    catch (error)
     {
       return [];
     }
@@ -126,22 +124,22 @@ export class Database
    * @param {string} id the unique reference for Record
    * @returns
    */
-  async findById(type: string, id: string | number): Promise<Record<string, unknown> | Error>
+  async findById(type: string, id: string | number): Promise<Record<string, unknown>>
   {
-    const data = await readJsonFile(`${this._scope.path}/${this._scope.name}/${type}/${id}.json`);
-    if (!(data instanceof Error))
+    try
     {
+      const data = await readJsonFile(`${this._scope.path}/${this._scope.name}/${type}/${id}.json`);
       return data;
     }
-    else
+    catch (error)
     {
-      if (data.message === 'NEXIST')
+      if ((error as Error).message === 'NEXIST')
       {
-        return new Error('Record is not exist');
+        throw new Error('Record is not exist');
       }
       else
       {
-        return new Error(data.message);
+        throw error;
       }
     }
   }
@@ -157,44 +155,42 @@ export class Database
     type: string,
     data: Record<string, unknown>,
     id: string | number
-  ): Promise<true | Error>
+  ): Promise<void>
   {
-    const old = await readJsonFile(`${this._scope.path}/${this._scope.name}/${type}/${id}.json`);
-    if (!(old instanceof Error))
+    try
     {
+      const old = await readJsonFile(`${this._scope.path}/${this._scope.name}/${type}/${id}.json`);
       data._modified = utcTimestamp();
-      const file = await writeJsonFile(
-        `${this._scope.path}/${this._scope.name}/${type}/${id}.json`,
-        {
-          ...old,
-          ...data
-        },
-        true
-      );
-
-      if (file === true)
+      try
       {
-        return true;
+        await writeJsonFile(
+          `${this._scope.path}/${this._scope.name}/${type}/${id}.json`,
+          {
+            ...old,
+            ...data
+          },
+          true
+        );
       }
-      else
+      catch
       {
-        return new Error('Update is not successful');
+        throw new Error('Update is not successful');
       }
     }
-    else
+    catch (error)
     {
-      if (old.message === 'NEXIST')
+      if ((error as Error).message === 'NEXIST')
       {
-        return new Error('Record is not exist');
+        throw new Error('Record is not exist');
       }
       else
       {
-        return new Error(old.message);
+        throw error;
       }
     }
   }
 
-  // delete(_type: string, _query: QueryType): unknown
+  // delete(_type: string, _query: QueryType): unknown;
   // {
   //   return null;
   // }

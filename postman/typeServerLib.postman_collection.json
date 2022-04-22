@@ -1,29 +1,174 @@
 {
 	"info": {
-		"_postman_id": "2b13c3ad-32e9-46e1-ad7e-ecf6eab9e182",
-		"name": "typeServerLib",
+		"_postman_id": "5629a28a-3c2f-4a76-8375-cb7ad5ebc742",
+		"name": "demoTypeServer",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "main-test",
+			"name": "Main",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/{{version}}",
+					"raw": "{{host}}/{{v}}/",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
-						"{{version}}"
+						"{{v}}",
+						""
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "test-bodyparser",
+			"name": "Util",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/{{v}}/util",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{v}}",
+						"util"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Json file",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/{{v}}/json-file",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{v}}",
+						"json-file"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Database save",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/{{v}}/database-save",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{v}}",
+						"database-save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Database insert",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/{{v}}/database-insert",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{v}}",
+						"database-insert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Database insert by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/{{v}}/database-insert-id",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{v}}",
+						"database-insert-id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Database update by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/{{v}}/database-update-id",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{v}}",
+						"database-update-id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Database find id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/{{v}}/database-find-id",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{v}}",
+						"database-find-id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Database find all",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/{{v}}/database-find-all",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{v}}",
+						"database-find-all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bodyparser",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -32,7 +177,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"test\": \"Godgiven\"\r\n}",
+					"raw": "{\r\n    \"test\": \"Params was received\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -40,12 +185,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/{{version}}/test",
+					"raw": "{{host}}/{{v}}/test",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
-						"{{version}}",
+						"{{v}}",
 						"test"
 					]
 				}
@@ -53,9 +198,6 @@
 			"response": []
 		}
 	],
-	"auth": {
-		"type": "bearer"
-	},
 	"event": [
 		{
 			"listen": "prerequest",
@@ -79,10 +221,10 @@
 	"variable": [
 		{
 			"key": "host",
-			"value": "http://localhost:5000"
+			"value": "localhost:5000"
 		},
 		{
-			"key": "version",
+			"key": "v",
 			"value": "v1"
 		}
 	]
