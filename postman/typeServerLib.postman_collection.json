@@ -24,6 +24,24 @@
 			"response": []
 		},
 		{
+			"name": "Validator",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/{{v}}/validator",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{v}}",
+						"validator"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Util",
 			"request": {
 				"method": "GET",

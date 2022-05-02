@@ -1,6 +1,6 @@
 {
   "name": "@godgiven/json-file",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "Typescript/Javascript json file manager package",
   "main": "index.js",
   "author": "Godgiven",
@@ -8,7 +8,7 @@
   "types": "index.d.ts",
   "license": "Apache-2.0",
   "dependencies": {
-    "tslib": "^2.2.0"
+    "tslib": "^2.4.0"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,6 @@
     "access": "public"
   },
   "devDependencies": {
-    "@types/node": "^17.0.23"
+    "@types/node": "^17.0.31"
   }
 }
