@@ -10,7 +10,7 @@
   "dependencies": {
     "@godgiven/signal": "^0.1.4",
     "debug": "^4.3.4",
-    "tslib": "^2.2.0"
+    "tslib": "^2.4.0"
   },
   "devDependencies": {
     "@types/debug": "^4.1.7"

@@ -10,7 +10,7 @@
   "dependencies": {
     "@godgiven/json-file": "^0.1.4",
     "@godgiven/util": "^0.1.4",
-    "tslib": "^2.2.0"
+    "tslib": "^2.4.0"
   },
   "repository": {
     "type": "git",
