@@ -21,6 +21,18 @@ export const pageValidator = async (_request: requestType, response: ServerRespo
       phone: {
         'test string': validate.isMobilePhone('test string'),
         '+989999999999': validate.isMobilePhone('+989999999999'),
+      },
+      Alpha: {
+        'test string': validate.isAlpha('test string'),
+        'test 12 35 string': validate.isAlpha('test 12 35 string'),
+        Object: validate.isAlpha({ test: 'test' }),
+        125: validate.isAlpha(125),
+      },
+      isAlphanumeric: {
+        'test string': validate.isAlphanumeric('test string'),
+        'test 12 35 string': validate.isAlphanumeric('test 12 35 string'),
+        Object: validate.isAlphanumeric({ test: 'test' }),
+        125: validate.isAlphanumeric('125'),
       }
     },
   });
