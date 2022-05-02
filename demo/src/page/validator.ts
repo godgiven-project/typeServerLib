@@ -17,6 +17,10 @@ export const pageValidator = async (_request: requestType, response: ServerRespo
         'test string': validate.isEmail('test string'),
         'test@string.com': validate.isEmail('test@string.com'),
         Object: validate.isEmail({ test: 'test' }),
+      },
+      phone: {
+        'test string': validate.isMobilePhone('test string'),
+        '+989999999999': validate.isMobilePhone('+989999999999'),
       }
     },
   });
