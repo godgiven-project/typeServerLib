@@ -1,6 +1,6 @@
 {
   "name": "@godgiven/validator",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "Typescript/Javascript validator",
   "main": "index.js",
   "author": "Godgiven",

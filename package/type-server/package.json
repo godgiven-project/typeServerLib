@@ -1,6 +1,6 @@
 {
   "name": "@godgiven/type-server",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "Rest full api server with http",
   "main": "index.js",
   "author": "Godgiven",
@@ -8,7 +8,7 @@
   "types": "index.d.ts",
   "license": "Apache-2.0",
   "dependencies": {
-    "@godgiven/signal": "^0.1.4",
+    "@godgiven/signal": "^0.2.0",
     "debug": "^4.3.4",
     "tslib": "^2.4.0"
   },
