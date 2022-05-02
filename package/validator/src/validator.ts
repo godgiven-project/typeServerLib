@@ -1,12 +1,16 @@
 import isEmail from 'validator/lib/isEmail.js';
-import isMobilePhone from 'validator/lib/isMobilePhone.js';
+import { isMobilePhone } from './lib/isMobilePhone.js';
 import isAlpha from 'validator/lib/isAlpha.js';
 import isAlphanumeric from 'validator/lib/isAlphanumeric.js';
 
 export const validate = {
   isEmail: (value: unknown): boolean => typeof value === 'string' ? isEmail(value) : false,
   isExist: (value: unknown): boolean => value != null,
-  isMobilePhone: (value: unknown): boolean => typeof value === 'string' ? isMobilePhone(value) : false,
+  isMobilePhone: (value: unknown): boolean =>
+  {
+    // if (typeof value !== 'string') { return false; }
+    return isMobilePhone(value);
+  },
   isAlpha: (value: unknown): boolean =>
   {
     return typeof value === 'string' ? (isAlpha(value) || isAlpha(value, 'fa-IR')) : false;
