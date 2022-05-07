@@ -16,11 +16,11 @@
     "url": "https://github.com/godgiven-project/typeServerLib/tree/next/package/validator"
   },
   "files": [
-    "*.js",
-    "*.js.map",
-    "*.d.ts",
-    "*.d.ts.map",
-    "*.md",
+    "**/*.js",
+    "**/*.js.map",
+    "**/*.d.ts",
+    "**/*.d.ts.map",
+    "**/*.md",
     "LICENSE"
   ],
   "publishConfig": {
