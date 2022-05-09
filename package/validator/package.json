@@ -1,6 +1,6 @@
 {
   "name": "@godgiven/validator",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Typescript/Javascript validator",
   "main": "index.js",
   "author": "Godgiven",
@@ -16,11 +16,11 @@
     "url": "https://github.com/godgiven-project/typeServerLib/tree/next/package/validator"
   },
   "files": [
-    "*.js",
-    "*.js.map",
-    "*.d.ts",
-    "*.d.ts.map",
-    "*.md",
+    "**/*.js",
+    "**/*.js.map",
+    "**/*.d.ts",
+    "**/*.d.ts.map",
+    "**/*.md",
     "LICENSE"
   ],
   "publishConfig": {
