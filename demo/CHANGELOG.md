@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.2.2 (2022-08-26)
+
+
+### Features
+
+* **demo:** Add util page ([d078c99](https://github.com/godgiven-project/typeServerLib/commit/d078c992afaeae82773abfa63cb22ae5df411149))
+
+
+
+
+
+
 ## 0.2.1 (2022-05-09)
 
 
