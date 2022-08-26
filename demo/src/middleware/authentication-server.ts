@@ -17,7 +17,7 @@ export interface requestType extends IncomingMessage
 
 const debug = Debug('auth');
 // define plugin using callbacks
-export const authFunction = (request: requestType, reply: ServerResponse): requestType =>
+export const authFunction = async (request: requestType, reply: ServerResponse): Promise<requestType> =>
 {
   const authHeader = request.headers.authorization;
   // const secret: string | undefined = 'sssssss';
