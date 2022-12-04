@@ -1,4 +1,4 @@
-import isEmail from 'validator/lib/isEmail.js';
+import isEmail from 'validator/es/lib/isEmail.js';
 import { isMobilePhone } from './lib/isMobilePhone.js';
 import { isAlpha, isAlphanumeric } from './lib/isAlpha.js';
 

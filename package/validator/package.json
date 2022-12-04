@@ -27,6 +27,6 @@
     "access": "public"
   },
   "devDependencies": {
-    "@types/validator": "^13.7.2"
+    "@types/validator": "^13.7.10"
   }
 }
