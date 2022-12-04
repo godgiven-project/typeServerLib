@@ -11,7 +11,8 @@ import {
   pageFindUniqueIdDatabase,
   pageFindAllDatabase,
   pageSaveUniqueIdDatabase,
-  pageValidator
+  pageValidator,
+  pageDeleteJsonFile
 } from './page/index.js';
 
 const app = new App();
@@ -22,6 +23,7 @@ app.middlewareList.push(authFunction);
 app.register('GET', '/', pageHome);
 app.register('GET', '/util', pageUtil);
 app.register('GET', '/json-file', pageJsonFile);
+app.register('GET', '/delete-json-file', pageDeleteJsonFile);
 app.register('GET', '/database-save', pageSaveUniqueIdDatabase);
 app.register('GET', '/database-insert', pageInsertDatabase);
 app.register('GET', '/database-insert-id', pageInsertUniqueIdDatabase);
