@@ -10,3 +10,4 @@ export * from './database-update-by-id.js';
 export * from './database-find-by-id.js';
 export * from './database-find-all.js';
 export * from './delete-json-file.js';
+export * from './database-delete-by-id.js';

@@ -1,6 +1,6 @@
 import { createId } from '@godgiven/util/uuid.js';
 import { utcTimestamp } from '@godgiven/util/time.js';
-import { writeJsonFile, readJsonDirectory, readJsonFile } from '@godgiven/json-file';
+import { writeJsonFile, readJsonDirectory, readJsonFile, deleteJsonFile } from '@godgiven/json-file';
 
 // interface QueryType extends Record<string, string> {}
 
@@ -115,6 +115,31 @@ export class Database
     catch (error)
     {
       return [];
+    }
+  }
+
+  /**
+   *
+   * @param {string} type similar the table and structure
+   * @param {string} id the unique reference for Record
+   * @returns
+   */
+  async deleteById(type: string, id: string | number): Promise<void>
+  {
+    try
+    {
+      await deleteJsonFile(`${this._scope.path}/${this._scope.name}/${type}/${id}.json`);
+    }
+    catch (error)
+    {
+      if ((error as Error).message === 'NEXIST')
+      {
+        throw new Error('Record is not exist');
+      }
+      else
+      {
+        throw error;
+      }
     }
   }
 
