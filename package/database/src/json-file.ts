@@ -43,15 +43,16 @@ export class Database
     id: string = createId()
   ): Promise<void>
   {
-    data._id = id;
-    data._modified = utcTimestamp();
-    data._created = utcTimestamp();
-
     try
     {
       await writeJsonFile(
         `${this._scope.path}/${this._scope.name}/${type}/${id}.json`,
-        data,
+        {
+          ...data,
+          _id: id,
+          _modified: utcTimestamp(),
+          _created: utcTimestamp()
+        },
         false
       );
     }
@@ -82,15 +83,16 @@ export class Database
     id: string = createId()
   ): Promise<void>
   {
-    data._id = id;
-    data._modified = utcTimestamp();
-    data._created = utcTimestamp();
-
     try
     {
       await writeJsonFile(
         `${this._scope.path}/${this._scope.name}/${type}/${id}.json`,
-        data,
+        {
+          ...data,
+          _id: id,
+          _modified: utcTimestamp(),
+          _created: utcTimestamp()
+        },
         true
       );
     }
@@ -192,7 +194,9 @@ export class Database
           `${this._scope.path}/${this._scope.name}/${type}/${id}.json`,
           {
             ...old,
-            ...data
+            ...data,
+            _id: id,
+            _modified: utcTimestamp(),
           },
           true
         );
