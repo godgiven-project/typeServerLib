@@ -1,6 +1,6 @@
 {
   "name": "@godgiven/demo",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Rest full api server",
   "main": "index.js",
   "author": "Godgiven",
@@ -12,11 +12,11 @@
     "tslib": "^2.4.0"
   },
   "devDependencies": {
-    "@godgiven/database": "^0.2.2",
-    "@godgiven/json-file": "^0.2.2",
-    "@godgiven/type-server": "^0.2.2",
-    "@godgiven/util": "^0.2.2",
-    "@godgiven/validator": "^0.2.2",
+    "@godgiven/database": "^0.2.3",
+    "@godgiven/json-file": "^0.2.3",
+    "@godgiven/type-server": "^0.2.3",
+    "@godgiven/util": "^0.2.3",
+    "@godgiven/validator": "^0.2.3",
     "@types/debug": "^4.1.7",
     "@types/jsonwebtoken": "^8.5.8"
   }

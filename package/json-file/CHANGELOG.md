@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.2.3 (2022-12-04)
+
+
+### Features
+
+* **deleteJsonFile:** init code ([f93b901](https://github.com/godgiven-project/typeServerLib/commit/f93b901b86d23677420ffd970fddd2cd346ae4dc))
+
+
+
+
+
+
 ## 0.2.2 (2022-08-26)
 
 **Note:** Version bump only for package @godgiven/json-file
