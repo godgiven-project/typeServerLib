@@ -1,6 +1,6 @@
 {
   "name": "@godgiven/validator",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Typescript/Javascript validator",
   "main": "index.js",
   "author": "Godgiven",
@@ -27,6 +27,6 @@
     "access": "public"
   },
   "devDependencies": {
-    "@types/validator": "^13.7.2"
+    "@types/validator": "^13.7.10"
   }
 }
