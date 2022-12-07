@@ -8,7 +8,7 @@ const log = Debug('app/page/database/findById');
 
 const Db = new Database({
   name: 'testDb',
-  path: './data',
+  path: './data'
 });
 
 export const pageFindUniqueIdDatabase = async (_request: requestType, response: ServerResponse): Promise<void> =>
@@ -23,7 +23,7 @@ export const pageFindUniqueIdDatabase = async (_request: requestType, response: 
     sendResponse(response, 200, {
       ok: true,
       description: '..:: Welcome ::..',
-      data: test,
+      data: test
     });
   }
   catch (error)
@@ -33,7 +33,7 @@ export const pageFindUniqueIdDatabase = async (_request: requestType, response: 
       description: '..:: Welcome ::..',
       data: {
         message: (error as Error).message
-      },
+      }
     });
   }
 };

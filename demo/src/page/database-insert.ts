@@ -8,7 +8,7 @@ const log = Debug('app/page/database/insert');
 
 const Db = new Database({
   name: 'testDb',
-  path: './data',
+  path: './data'
 });
 
 export const pageInsertDatabase = async (_request: requestType, response: ServerResponse): Promise<void> =>
@@ -18,14 +18,14 @@ export const pageInsertDatabase = async (_request: requestType, response: Server
   {
     await Db.insert(
       'testTable',
-      { testField: 'Everything is ok' },
+      { testField: 'Everything is ok' }
     );
     sendResponse(response, 200, {
       ok: true,
       description: '..:: Welcome ::..',
       data: {
         status: 'testField insert to testTable in test Db.'
-      },
+      }
     });
   }
   catch (error)
@@ -35,7 +35,7 @@ export const pageInsertDatabase = async (_request: requestType, response: Server
       description: '..:: Welcome ::..',
       data: {
         message: (error as Error).message
-      },
+      }
     });
   }
 };

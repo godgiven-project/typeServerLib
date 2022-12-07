@@ -14,7 +14,7 @@ export const pageUtil = async (_request: requestType, response: ServerResponse):
     ok: true,
     description: '..:: Welcome ::..',
     data: {
-      uuid: createId(),
-    },
+      uuid: createId()
+    }
   });
 };
