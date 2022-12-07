@@ -1,6 +1,6 @@
 {
   "name": "@godgiven/util",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Typescript/Javascript util package",
   "main": "index.js",
   "author": "Godgiven",

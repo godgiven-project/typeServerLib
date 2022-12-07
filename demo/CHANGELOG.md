@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.2.4 (2022-12-07)
+
+
+### Features
+
+* **deleteJsonFile:** init code ([f93b901](https://github.com/godgiven-project/typeServerLib/commit/f93b901b86d23677420ffd970fddd2cd346ae4dc))
+* **demo:** Add util page ([d078c99](https://github.com/godgiven-project/typeServerLib/commit/d078c992afaeae82773abfa63cb22ae5df411149))
+
+
+
+
+
+
 ## 0.2.3 (2022-12-04)
 
 
