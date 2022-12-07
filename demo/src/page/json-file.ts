@@ -17,6 +17,6 @@ export const pageJsonFile = async (_request: requestType, response: ServerRespon
     description: '..:: Welcome ::..',
     data: {
       test: json
-    },
+    }
   });
 };

@@ -8,7 +8,7 @@ const log = Debug('app/page/database/update');
 
 const Db = new Database({
   name: 'testDb',
-  path: './data',
+  path: './data'
 });
 
 export const pageUpdateUniqueIdDatabase = async (_request: requestType, response: ServerResponse): Promise<void> =>
@@ -26,7 +26,7 @@ export const pageUpdateUniqueIdDatabase = async (_request: requestType, response
       description: '..:: Welcome ::..',
       data: {
         status: 'testRecord update to testTable in test Db.'
-      },
+      }
     });
   }
   catch (error)
@@ -36,7 +36,7 @@ export const pageUpdateUniqueIdDatabase = async (_request: requestType, response
       description: '..:: Welcome ::..',
       data: {
         message: (error as Error).message
-      },
+      }
     });
   }
 };

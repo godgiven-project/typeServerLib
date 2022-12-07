@@ -5,7 +5,7 @@ import {
   verify as verifyType,
   SignOptions,
   VerifyOptions,
-  Algorithm,
+  Algorithm
 } from 'jsonwebtoken';
 const jsonwebtoken = _jsonwebtoken as any;
 
@@ -17,5 +17,5 @@ export {
   verify,
   Algorithm,
   SignOptions,
-  VerifyOptions,
+  VerifyOptions
 };

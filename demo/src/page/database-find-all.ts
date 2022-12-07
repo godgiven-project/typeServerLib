@@ -8,7 +8,7 @@ const log = Debug('app/page/database/findAll');
 
 const Db = new Database({
   name: 'testDb',
-  path: './data',
+  path: './data'
 });
 
 export const pageFindAllDatabase = async (_request: requestType, response: ServerResponse): Promise<void> =>
@@ -19,6 +19,6 @@ export const pageFindAllDatabase = async (_request: requestType, response: Serve
   sendResponse(response, 200, {
     ok: true,
     description: '..:: Welcome ::..',
-    data: test,
+    data: test
   });
 };

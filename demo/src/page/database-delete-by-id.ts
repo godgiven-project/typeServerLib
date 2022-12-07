@@ -8,7 +8,7 @@ const log = Debug('app/page/database/deleteById');
 
 const Db = new Database({
   name: 'testDb',
-  path: './data',
+  path: './data'
 });
 
 export const pageDeleteUniqueIdDatabase = async (_request: requestType, response: ServerResponse): Promise<void> =>
@@ -22,7 +22,7 @@ export const pageDeleteUniqueIdDatabase = async (_request: requestType, response
     );
     sendResponse(response, 200, {
       ok: true,
-      description: '..:: Welcome ::..',
+      description: '..:: Welcome ::..'
     });
   }
   catch (error)
@@ -32,7 +32,7 @@ export const pageDeleteUniqueIdDatabase = async (_request: requestType, response
       description: '..:: Welcome ::..',
       data: {
         message: (error as Error).message
-      },
+      }
     });
   }
 };

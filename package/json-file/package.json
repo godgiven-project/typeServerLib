@@ -1,6 +1,6 @@
 {
   "name": "@godgiven/json-file",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Typescript/Javascript json file manager package",
   "main": "index.js",
   "author": "Godgiven",
@@ -26,6 +26,6 @@
     "access": "public"
   },
   "devDependencies": {
-    "@types/node": "^17.0.31"
+    "@types/node": "^18.11.11"
   }
 }

@@ -11,7 +11,7 @@ export const pageHome = async (_request: requestType, response: ServerResponse):
 
   sendResponse(response, 200, {
     ok: true,
-    description: '..:: Welcome ::..',
+    description: '..:: Welcome ::..'
     // data: {
     //   app: packageJson.description,
     // },

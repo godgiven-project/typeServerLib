@@ -13,6 +13,6 @@ export const pageDeleteJsonFile = async (_request: requestType, response: Server
   await deleteJsonFile(jsonAdders);
   sendResponse(response, 200, {
     ok: true,
-    description: '..:: Welcome ::..',
+    description: '..:: Welcome ::..'
   });
 };

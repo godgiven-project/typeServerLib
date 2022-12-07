@@ -196,7 +196,7 @@ export class Database
             ...old,
             ...data,
             _id: id,
-            _modified: utcTimestamp(),
+            _modified: utcTimestamp()
           },
           true
         );
