@@ -6,6 +6,23 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ## 0.2.4 (2022-12-07)
 
 
+### Bug Fixes
+
+* **build:** resolve error of new eslint version ([a4ec983](https://github.com/godgiven-project/typeServerLib/commit/a4ec983a2720c6caca5777f1a26ddb2a38771d6f))
+
+
+### Features
+
+* **deleteJsonFile:** init code ([f93b901](https://github.com/godgiven-project/typeServerLib/commit/f93b901b86d23677420ffd970fddd2cd346ae4dc))
+* **demo:** Add util page ([d078c99](https://github.com/godgiven-project/typeServerLib/commit/d078c992afaeae82773abfa63cb22ae5df411149))
+
+
+
+
+
+## 0.2.4 (2022-12-07)
+
+
 ### Features
 
 * **deleteJsonFile:** init code ([f93b901](https://github.com/godgiven-project/typeServerLib/commit/f93b901b86d23677420ffd970fddd2cd346ae4dc))

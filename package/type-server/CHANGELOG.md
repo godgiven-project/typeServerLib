@@ -11,6 +11,14 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
+## 0.2.4 (2022-12-07)
+
+**Note:** Version bump only for package @godgiven/type-server
+
+
+
+
+
 
 ## 0.2.3 (2022-12-04)
 
