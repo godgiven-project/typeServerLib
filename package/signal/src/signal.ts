@@ -19,7 +19,7 @@ import type {
 /**
  * Signal API interface as a remote controller.
  */
-export class SignalInterface<SignalName extends keyof AlwatrSignals>
+export class SignalInterface<SignalName extends keyof SignalNameList>
 {
   protected _signal;
   protected _requestSignal;
@@ -57,7 +57,7 @@ export class SignalInterface<SignalName extends keyof AlwatrSignals>
    * }
    * ```
    */
-  get value(): AlwatrSignals[SignalName] | undefined
+  get value(): SignalNameList[SignalName] | undefined
   {
     return this._signal.value;
   }
@@ -158,12 +158,12 @@ export class SignalInterface<SignalName extends keyof AlwatrSignals>
    * const newContent = await contentChangeSignal.request({foo: 'bar'});
    * ```
    */
-  request(requestParam: AlwatrRequestSignals[SignalName]): Promise<AlwatrSignals[SignalName]>
+  request(requestParam: RequestSignalNameList[SignalName]): Promise<SignalNameList[SignalName]>
   {
     const nextSignalValuePromise = this.getNextSignalValue();
     _dispatchSignal(
       this._requestSignal,
-      requestParam as unknown as AlwatrSignals[SignalName] // mastmalize to avoid type error
+      requestParam as unknown as SignalNameList[SignalName] // mastmalize to avoid type error
     );
     return nextSignalValuePromise;
   }
@@ -179,7 +179,7 @@ export class SignalInterface<SignalName extends keyof AlwatrSignals>
    * const newContent = await contentChangeSignal.getNextSignalValue();
    * ```
    */
-  getNextSignalValue(): Promise<AlwatrSignals[SignalName]>
+  getNextSignalValue(): Promise<SignalNameList[SignalName]>
   {
     return new Promise((resolve) =>
     {
@@ -204,7 +204,7 @@ export class SignalInterface<SignalName extends keyof AlwatrSignals>
    * const content = await contentChangeSignal.getSignalValue();
    * ```
    */
-  getSignalValue(): Promise<AlwatrSignals[SignalName]>
+  getSignalValue(): Promise<SignalNameList[SignalName]>
   {
     if (this._signal.value !== undefined)
     {
@@ -226,7 +226,7 @@ export class SignalInterface<SignalName extends keyof AlwatrSignals>
    * contentChangeSignal.dispatch(content);
    * ```
    */
-  dispatch(signalValue: AlwatrSignals[SignalName], options?: DispatchOptions): void
+  dispatch(signalValue: SignalNameList[SignalName], options?: DispatchOptions): void
   {
     _dispatchSignal(this._signal, signalValue, options);
   }
@@ -254,7 +254,7 @@ export class SignalInterface<SignalName extends keyof AlwatrSignals>
 /**
  * Signal Listener API interface as a remote controller.
  */
-export class ListenerInterface<SignalName extends keyof AlwatrSignals>
+export class ListenerInterface<SignalName extends keyof SignalNameList>
 {
   constructor(protected _signal: SignalObject<SignalName>, protected _listener: ListenerObject<SignalName>)
   {

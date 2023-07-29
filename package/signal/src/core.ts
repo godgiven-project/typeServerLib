@@ -29,7 +29,7 @@ const _signalStack: SignalStack = {};
  * signal.disabled = true;
  * ```
  */
-export function _getSignalObject<SignalName extends keyof AlwatrSignals>(
+export function _getSignalObject<SignalName extends keyof SignalNameList>(
   signalName: SignalName
 ): SignalObject<SignalName>
 {
@@ -49,7 +49,7 @@ export function _getSignalObject<SignalName extends keyof AlwatrSignals>(
  *
  */
 // eslint-disable-next-line @typescript-eslint/naming-convention
-function __callListeners<SignalName extends keyof AlwatrSignals>(signal: SignalObject<SignalName>): void
+function __callListeners<SignalName extends keyof SignalNameList>(signal: SignalObject<SignalName>): void
 {
   if (signal.value === undefined)
   {
@@ -82,7 +82,7 @@ function __callListeners<SignalName extends keyof AlwatrSignals>(signal: SignalO
  * const listener = _addSignalListener(signal, (content) => console.log(content));
  * ```
  */
-export function _addSignalListener<SignalName extends keyof AlwatrSignals>(
+export function _addSignalListener<SignalName extends keyof SignalNameList>(
   signal: SignalObject<SignalName>,
   listenerCallback: ListenerCallback<SignalName>,
   options: ListenerOptions = {}
@@ -156,7 +156,7 @@ export function _addSignalListener<SignalName extends keyof AlwatrSignals>(
  * _removeSignalListener(signal, listener);
  * ```
  */
-export function _removeSignalListener<SignalName extends keyof AlwatrSignals>(
+export function _removeSignalListener<SignalName extends keyof SignalNameList>(
   signal: SignalObject<SignalName>,
   listenerId: number
 ): void
@@ -175,9 +175,9 @@ export function _removeSignalListener<SignalName extends keyof AlwatrSignals>(
  * const signal = _getSignalObject('content-change')
  * _dispatchSignal(signal, content);
  */
-export function _dispatchSignal<SignalName extends keyof AlwatrSignals>(
+export function _dispatchSignal<SignalName extends keyof SignalNameList>(
   signal: SignalObject<SignalName>,
-  value: AlwatrSignals[SignalName],
+  value: SignalNameList[SignalName],
   options: DispatchOptions = {}
 ): void
 {
@@ -223,7 +223,7 @@ export function _dispatchSignal<SignalName extends keyof AlwatrSignals>(
  * }
  * ```
  */
-export function _setSignalProvider<SignalName extends keyof AlwatrSignals>(
+export function _setSignalProvider<SignalName extends keyof SignalNameList>(
   signal: SignalObject<SignalName>,
   requestSignal: SignalObject<SignalName>,
   signalProvider: SignalProvider<SignalName>,
@@ -238,7 +238,7 @@ export function _setSignalProvider<SignalName extends keyof AlwatrSignals>(
     requestSignal.listenerList = [];
   }
 
-  const _callback = async (requestParam: AlwatrRequestSignals[SignalName]): Promise<void> =>
+  const _callback = async (requestParam: RequestSignalNameList[SignalName]): Promise<void> =>
   {
     const signalValue = await signalProvider(requestParam);
     if (signalValue !== undefined)

@@ -3,7 +3,7 @@ declare global
   /**
    * Global signals value type registry.
    */
-  interface AlwatrSignals
+  interface SignalNameList
   {
     readonly 'easter-egg': string;
   }
@@ -11,7 +11,7 @@ declare global
   /**
    * Global request signal parameters types.
    */
-  interface AlwatrRequestSignals
+  interface RequestSignalNameList
   {
     readonly 'easter-egg': number;
   }
@@ -90,21 +90,21 @@ export interface SignalProviderOptions
 /**
  * Signal listeners callback function type.
  */
-export type ListenerCallback<SignalName extends keyof AlwatrSignals> = (
-  signalValue: AlwatrSignals[SignalName]
+export type ListenerCallback<SignalName extends keyof SignalNameList> = (
+  signalValue: SignalNameList[SignalName]
 ) => void | Promise<void>;
 
 /**
  * Signal provider function type used to setSignalProvider.
  */
-export type SignalProvider<SignalName extends keyof AlwatrRequestSignals> = (
-  requestParam: AlwatrRequestSignals[SignalName]
-) => AlwatrSignals[SignalName] | void | Promise<AlwatrSignals[SignalName] | void>;
+export type SignalProvider<SignalName extends keyof RequestSignalNameList> = (
+  requestParam: RequestSignalNameList[SignalName]
+) => SignalNameList[SignalName] | void | Promise<SignalNameList[SignalName] | void>;
 
 /**
  * Signal listeners object in database.
  */
-export interface ListenerObject<SignalName extends keyof AlwatrSignals>
+export interface ListenerObject<SignalName extends keyof SignalNameList>
 {
   /**
    * Unique listener id
@@ -127,7 +127,7 @@ export interface ListenerObject<SignalName extends keyof AlwatrSignals>
 /**
  * Signal object in database.
  */
-export interface SignalObject<SignalName extends keyof AlwatrSignals>
+export interface SignalObject<SignalName extends keyof SignalNameList>
 {
   /**
    * Signal name for direct access.
@@ -137,7 +137,7 @@ export interface SignalObject<SignalName extends keyof AlwatrSignals>
   /**
    * Last dispatched value.
    */
-  value?: AlwatrSignals[SignalName];
+  value?: SignalNameList[SignalName];
 
   /**
    * If true, the signal is disabled.
@@ -160,5 +160,5 @@ export interface SignalObject<SignalName extends keyof AlwatrSignals>
  * Signal stack database.
  */
 export type SignalStack = {
-  [SignalName in keyof AlwatrSignals]?: SignalObject<SignalName>;
+  [SignalName in keyof SignalNameList]?: SignalObject<SignalName>;
 };

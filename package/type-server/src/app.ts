@@ -1,9 +1,24 @@
 import { createServer } from 'http';
 import { readFileSync } from 'fs';
 import { methodType } from './type.js';
-import { dispatchSignal } from '@godgiven/signal';
+import { SignalInterface } from '@godgiven/signal';
 import type { IncomingMessage, ServerResponse, Server } from 'http';
 import debug from 'debug';
+
+declare global
+{
+  /**
+   * Global signals value type registry.
+   */
+  interface SignalNameList
+  {
+    readonly 'api': {
+      version: string;
+    };
+  }
+}
+
+const versionSignal = new SignalInterface('api');
 
 export class App
 {
@@ -73,9 +88,7 @@ export class App
       showCover = showCover.replace('$2', 'Godgiven');
       showCover = showCover.replace('$3', 'https://github.com/godgiven-project');
       console.log(showCover);
-      void dispatchSignal('api', {
-        version: this.version
-      });
+      versionSignal.dispatch({ version: this.version });
     });
   }
 }
