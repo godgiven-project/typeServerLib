@@ -1,0 +1,28 @@
+{
+  "name": "@godgiven/router",
+  "version": "0.2.4",
+  "description": "Typescript/Javascript ui router",
+  "main": "router.js",
+  "author": "Godgiven",
+  "type": "module",
+  "types": "router.d.ts",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "tslib": "^2.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/godgiven-project/typeServerLib/tree/next/package/signal"
+  },
+  "files": [
+    "*.js",
+    "*.js.map",
+    "*.d.ts",
+    "*.d.ts.map",
+    "*.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -79,6 +79,7 @@
 
   "references": [
     {"path": "./package/signal/"},
+    {"path": "./package/router/"},
     {"path": "./package/type-server"},
     {"path": "./package/validator"},
     {"path": "./package/util"},
