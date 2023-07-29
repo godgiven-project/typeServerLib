@@ -2,10 +2,10 @@
   "name": "@godgiven/signal",
   "version": "0.2.4",
   "description": "Typescript/Javascript signal message handeler",
-  "main": "index.js",
+  "main": "signal.js",
   "author": "Godgiven",
   "type": "module",
-  "types": "index.d.ts",
+  "types": "signal.d.ts",
   "license": "Apache-2.0",
   "dependencies": {
     "tslib": "^2.4.0"
