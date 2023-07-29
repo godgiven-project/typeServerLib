@@ -1,5 +1,6 @@
 import { IncomingMessage } from 'http';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const bodyParser = async (request: IncomingMessage): Promise<Record<string, any>> =>
 {
   let body = '';

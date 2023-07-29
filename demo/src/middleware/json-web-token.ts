@@ -7,6 +7,7 @@ import {
   VerifyOptions,
   Algorithm
 } from 'jsonwebtoken';
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const jsonwebtoken = _jsonwebtoken as any;
 
 const sign: typeof signType = jsonwebtoken.default.sign;

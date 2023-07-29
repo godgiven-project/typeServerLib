@@ -124,7 +124,6 @@ export class Database
    *
    * @param {string} type similar the table and structure
    * @param {string} id the unique reference for Record
-   * @returns
    */
   async deleteById(type: string, id: string | number): Promise<void>
   {
@@ -149,7 +148,7 @@ export class Database
    *
    * @param {string} type similar the table and structure
    * @param {string} id the unique reference for Record
-   * @returns
+   * @returns {object} return an object
    */
   async findById(type: string, id: string | number): Promise<Record<string, unknown>>
   {
