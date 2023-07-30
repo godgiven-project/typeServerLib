@@ -1,18 +1,18 @@
 {
-  "name": "@godgiven/signal",
+  "name": "@godgiven/fetch",
   "version": "0.3.1",
-  "description": "Typescript/Javascript signal message handeler",
-  "main": "signal.js",
+  "description": "Typescript/Javascript fetch",
+  "main": "fetch.js",
   "author": "Godgiven",
   "type": "module",
-  "types": "signal.d.ts",
+  "types": "fetch.d.ts",
   "license": "Apache-2.0",
   "dependencies": {
     "tslib": "^2.4.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/godgiven-project/typeServerLib/tree/next/package/signal"
+    "url": "https://github.com/godgiven-project/typeServerLib/tree/next/package/fetch"
   },
   "files": [
     "*.js",

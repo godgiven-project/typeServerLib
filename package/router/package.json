@@ -1,18 +1,19 @@
 {
-  "name": "@godgiven/signal",
+  "name": "@godgiven/router",
   "version": "0.3.1",
-  "description": "Typescript/Javascript signal message handeler",
-  "main": "signal.js",
+  "description": "Typescript/Javascript ui router",
+  "main": "router.js",
   "author": "Godgiven",
   "type": "module",
-  "types": "signal.d.ts",
+  "types": "router.d.ts",
   "license": "Apache-2.0",
   "dependencies": {
+    "@godgiven/signal": "^0.3.0",
     "tslib": "^2.4.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/godgiven-project/typeServerLib/tree/next/package/signal"
+    "url": "https://github.com/godgiven-project/typeServerLib/tree/next/package/router"
   },
   "files": [
     "*.js",
