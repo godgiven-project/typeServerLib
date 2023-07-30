@@ -8,6 +8,7 @@
   "types": "router.d.ts",
   "license": "Apache-2.0",
   "dependencies": {
+    "@godgiven/signal": "^0.3.0",
     "tslib": "^2.4.0"
   },
   "repository": {

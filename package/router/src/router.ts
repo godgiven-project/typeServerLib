@@ -4,7 +4,7 @@ import { clickTrigger } from './trigger-click.js';
 import { popstateTrigger } from './trigger-popstate.js';
 
 import type { InitOptions, Route, RoutesConfig, RequestRouteParam } from './type.js';
-// import type { SignalInterface } from '@godgiven/signal';
+import type { SignalInterface } from '@godgiven/signal';
 
 export { type Route, type RequestRouteParam, type RoutesConfig, routeChangeSignal };
 
@@ -171,5 +171,6 @@ export const router = {
   /**
    * Signal interface of 'route-change' signal.
    */
-  signal: routeChangeSignal
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+  signal: routeChangeSignal as SignalInterface<'route-change'>
 } as const;
