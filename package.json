@@ -32,6 +32,7 @@
     "postinstall": "yarn build",
     "ver": "lerna version --no-push && git push && git push --tags",
     "ver-patch": "lerna version patch --no-push && git push && git push --tags",
+    "ver-minor": "lerna version minor --no-push && git push && git push --tags",
     "prepare-publish": "npm-run-all --sequential clean build:*",
     "release": "lerna publish from-package"
   },

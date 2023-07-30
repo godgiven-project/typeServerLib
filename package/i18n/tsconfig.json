@@ -1,14 +1,14 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "composite": true,
     "lib": [
       "ES2020",
       "ScriptHost",
       "WebWorker",
       "DOM"
       // "DOM.Iterable"
-    ],           
-    "composite": true,
+    ],  
     "rootDir": "./src/",
     "outDir": ".",
     "tsBuildInfoFile": ".tsbuildinfo"
@@ -18,5 +18,6 @@
   ],
   "references": [
     {"path": "../signal"},
+    {"path": "../fetch"}
   ]
 }

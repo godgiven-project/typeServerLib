@@ -1,13 +1,6 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "lib": [
-      "ES2020",
-      "ScriptHost",
-      "WebWorker",
-      "DOM"
-      // "DOM.Iterable"
-    ],           
     "composite": true,
     "rootDir": "./src/",
     "outDir": ".",
@@ -16,7 +9,4 @@
   "include": [
     "src/**/*.ts"
   ],
-  "references": [
-    {"path": "../signal"},
-  ]
 }
