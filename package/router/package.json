@@ -1,6 +1,6 @@
 {
   "name": "@godgiven/router",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Typescript/Javascript ui router",
   "main": "router.js",
   "author": "Godgiven",

@@ -1,6 +1,6 @@
 {
   "name": "@godgiven/i18n",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Typescript/Javascript i18n",
   "main": "i18n.js",
   "author": "Godgiven",
@@ -8,8 +8,8 @@
   "types": "i18n.d.ts",
   "license": "Apache-2.0",
   "dependencies": {
+    "@godgiven/fetch": "^0.3.1",
     "@godgiven/signal": "^0.3.0",
-    "@godgiven/fetch": "^0.3.0",
     "tslib": "^2.4.0"
   },
   "repository": {
