@@ -1,7 +1,7 @@
 import { createServer } from 'http';
 import { readFileSync } from 'fs';
 import { methodType } from './type.js';
-import { dispatchSignal } from '@godgiven/signal';
+// import { dispatchSignal } from '@godgiven/signal';
 import type { IncomingMessage, ServerResponse, Server } from 'http';
 import debug from 'debug';
 
@@ -59,9 +59,9 @@ export class App
       showCover = showCover.replace('$2', 'Godgiven');
       showCover = showCover.replace('$3', 'https://github.com/godgiven-project');
       console.log(showCover);
-      void dispatchSignal('api', {
-        version: this.version
-      });
+      // void dispatchSignal('api', {
+      //   version: this.version
+      // });
     });
   }
 }
