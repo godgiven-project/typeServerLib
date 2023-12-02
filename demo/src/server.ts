@@ -9,7 +9,8 @@ import {
   pageInsertUniqueIdDatabase,
   pageUpdateUniqueIdDatabase,
   pageFindUniqueIdDatabase,
-  pageFindAllDatabase
+  pageFindAllDatabase,
+  pageSignal
 } from './page/index.js';
 
 const app = new App();
@@ -26,6 +27,7 @@ app.register('GET', '/database-update-id', pageUpdateUniqueIdDatabase);
 app.register('GET', '/database-find-id', pageFindUniqueIdDatabase);
 app.register('GET', '/database-find-all', pageFindAllDatabase);
 app.register('GET', '/test', pageTest);
+app.register('GET', '/signal', pageSignal);
 app.register('GET', '', pageHome);
 
 app.listen();
