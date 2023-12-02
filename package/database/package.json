@@ -1,6 +1,6 @@
 {
   "name": "@godgiven/database",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Typescript/Javascript middlewere for communicate to databases",
   "main": "index.js",
   "author": "Godgiven",
@@ -8,8 +8,8 @@
   "types": "index.d.ts",
   "license": "Apache-2.0",
   "dependencies": {
-    "@godgiven/json-file": "^0.3.0",
-    "@godgiven/util": "^0.3.0",
+    "@godgiven/json-file": "^0.4.0",
+    "@godgiven/util": "^0.4.0",
     "tslib": "^2.4.0"
   },
   "repository": {

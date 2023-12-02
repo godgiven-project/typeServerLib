@@ -1,19 +1,13 @@
 import type { ParamList, RequestRouteParam, Route } from './type.js';
-
-/**
- * Handle requests of 'route-change' signal.
- */
-export function routeSignalProvider(requestParam: RequestRouteParam): Route
-{
-  updateBrowserHistory(requestParam);
-  return makeRouteObject(requestParam);
-}
+// import { sign } from '@godgiven/signal';
 
 /**
  * Update browser history state (history.pushState or history.replaceState).
  */
 export function updateBrowserHistory(options: RequestRouteParam): void
 {
+  // logger.logMethodArgs('updateBrowserHistory', { options });
+
   if (options.pushState === false) { return; } // default is true then undefined means true.
 
   options.search ??= '';
@@ -30,26 +24,6 @@ export function updateBrowserHistory(options: RequestRouteParam): void
 
   const changeState = options.pushState === 'replace' ? 'replaceState' : 'pushState';
   window.history[changeState](null, document.title, options.pathname + options.search + options.hash);
-}
-
-/**
- * Make Route from RequestRouteParam.
- */
-export function makeRouteObject(requestParam: RequestRouteParam): Route
-{
-  requestParam.search ??= '';
-  requestParam.hash ??= '';
-
-  const sectionList = requestParam.pathname
-    .split('/')
-    .map(_decodeURIComponent) // decode must be after split because encoded '/' maybe include in values.
-    .filter((section) => section.trim() !== '')
-    .map(parseValue);
-  return {
-    sectionList,
-    queryParamList: splitParameterString(requestParam.search.substring(1) /* remove first ? */),
-    hash: requestParam.hash
-  };
 }
 
 // --- Utils ---
@@ -92,8 +66,9 @@ export function joinParameterList(parameterList: ParamList | null | undefined): 
 export function splitParameterString(parameterString: string | null | undefined): ParamList
 {
   const parameterList: ParamList = {};
-  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-  if (!parameterString) { return parameterList; }
+  if (parameterString == null) { return parameterList; }
+  if (parameterString === '') { return parameterList; }
+  if (!(parameterString as unknown as boolean)) { return parameterList; }
 
   parameterString.split('&').forEach((parameter) =>
   {
@@ -107,13 +82,7 @@ export function splitParameterString(parameterString: string | null | undefined)
 /**
  * Check type of a value is `number` or not
  */
-export function parseValue(value: string): string | boolean | number
+export function parseValue(value: string): string
 {
-  const trimmedValue = value.trim().toLowerCase();
-  if (trimmedValue === '') { return value; }
-  if (trimmedValue === 'true' || trimmedValue === 'false') { return trimmedValue === 'true'; }
-  const parsedValue = parseFloat(trimmedValue);
-  // note: `parseFloat('NaN').toString() === 'NaN'` is true, then always check isNaN
-  if (!isNaN(parsedValue) && parsedValue.toString() === trimmedValue) { return parsedValue; }
   return value;
 }
