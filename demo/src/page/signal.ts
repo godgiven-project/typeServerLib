@@ -25,7 +25,7 @@ export const pageSignal = async (_request: requestType, response: ServerResponse
   signalDemo.dispatch('signal is working');
   sendResponse(response, 200, {
     ok: true,
-    description: '..:: Welcome ::..',
+    description: '..:: Welcome ::..'
     // data: {
     //   app: packageJson.description,
     // },

@@ -1,4 +1,4 @@
-import type { ParamList, RequestRouteParam, Route } from './type.js';
+import type { ParamList, RequestRouteParam } from './type.js';
 // import { sign } from '@godgiven/signal';
 
 /**

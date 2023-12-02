@@ -52,10 +52,17 @@
   resolved "https://registry.yarnpkg.com/@gar/promisify/-/promisify-1.1.3.tgz#555193ab2e3bb3b6adc3d551c9c030d9e860daf6"
   integrity sha512-k2Ty1JcVojjJFwrg/ThKi2ujJ7XNLYaFGNB/bWT9wGR+oSMJHMa5w+CUq6p/pVrKeNNgA7pCqEcjSnHVoqJQFw==
 
-"@godgiven/validator@^0.2.4":
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/@godgiven/validator/-/validator-0.2.4.tgz#e8f7ae78ee960b2848cfae84fce7f62994fcca4d"
-  integrity sha512-vRuEQuNY0E87lmLQnrqFOLs3t63G7tLjy67swl/bjSEIQ+Vgbyz+h5TZ/e/oTzP0ORC4/ca8GvRIIE7I02XCpQ==
+"@godgiven/signal@^0.3.0":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@godgiven/signal/-/signal-0.3.1.tgz#cc99eed89782752360d01ad668da046ee31a3514"
+  integrity sha512-BPVzJsF4ADKvKXOr8KtRaAPNayJKG5Nd+VW1VmMt3N3Lx3LLnfuqLCL1YIF4JOcjdEbR8HBBpcyfrJcxp1iANg==
+  dependencies:
+    tslib "^2.4.0"
+
+"@godgiven/validator@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@godgiven/validator/-/validator-0.3.0.tgz#02b02af68c1e29291054651c5c29ca858eee6239"
+  integrity sha512-Ij7vsw/+Tb7hKo+MApWPxz6oxbbiT3PK/Q79/DoNLYUb/CmtBsR35S1uQ/sPza1+j1Q5rE/lIczXe1pxT0trsA==
   dependencies:
     tslib "^2.4.0"
     validator "^13.7.0"

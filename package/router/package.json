@@ -1,8 +1,8 @@
 {
   "name": "@godgiven/router",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Typescript/Javascript route handler",
-  "main": "index.js",
+  "main": "router.ts",
   "author": "Godgiven",
   "type": "module",
   "types": "index.d.ts",
