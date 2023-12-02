@@ -8,35 +8,34 @@ const log = Debug('app/page/database/insert');
 
 const Db = new Database({
   name: 'testDb',
-  path: './data',
+  path: './data'
 });
 
 export const pageInsertDatabase = async (_request: requestType, response: ServerResponse): Promise<void> =>
 {
   log('pageInsertDatabase');
-  const test = await Db.insert(
-    'testTable',
-    { testField: 'Everything is ok' },
-  );
-
-  if (test !== true)
+  try
   {
-    sendResponse(response, 200, {
-      ok: false,
-      description: '..:: Welcome ::..',
-      data: {
-        message: test.message
-      },
-    });
-  }
-  else
-  {
+    await Db.insert(
+      'testTable',
+      { testField: 'Everything is ok' }
+    );
     sendResponse(response, 200, {
       ok: true,
       description: '..:: Welcome ::..',
       data: {
         status: 'testField insert to testTable in test Db.'
-      },
+      }
+    });
+  }
+  catch (error)
+  {
+    sendResponse(response, 200, {
+      ok: false,
+      description: '..:: Welcome ::..',
+      data: {
+        message: (error as Error).message
+      }
     });
   }
 };

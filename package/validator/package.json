@@ -1,0 +1,29 @@
+{
+  "name": "@godgiven/validator",
+  "version": "0.4.0",
+  "description": "Typescript/Javascript validator",
+  "main": "index.js",
+  "author": "Godgiven",
+  "type": "module",
+  "types": "index.d.ts",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "tslib": "^2.4.0",
+    "validator": "^13.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/godgiven-project/typeServerLib/tree/next/package/validator"
+  },
+  "files": [
+    "**/*.js",
+    "**/*.js.map",
+    "**/*.d.ts",
+    "**/*.d.ts.map",
+    "**/*.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

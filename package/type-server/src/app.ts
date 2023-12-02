@@ -10,8 +10,8 @@ export class App
   public app: Server;
   public port: number = 5000;
   public version: string = 'v1';
-  public middlewareList: Array<(req: IncomingMessage, res: ServerResponse) => IncomingMessage> = [];
-  public routeList: Record<string, (req: IncomingMessage, res: ServerResponse) => void> = {};
+  public middlewareList: Array<(req: IncomingMessage, res: ServerResponse) => Promise<IncomingMessage>> = [];
+  public routeList: Record<string, (req: IncomingMessage, res: ServerResponse) => Promise<void>> = {};
 
   constructor()
   {
@@ -23,11 +23,18 @@ export class App
         req = await middleware(req, res);
       }
       const url = `${req.method!} ${req.url!}`;
-      // console.log(url);
-      // console.log(Object.keys(this.routeList));
       if (url in this.routeList)
       {
-        this.routeList[url](req, res);
+        try
+        {
+          await this.routeList[url](req, res);
+        }
+        catch
+        {
+          res.writeHead(500, { 'Content-Type': 'application/json' });
+          debug('500');
+          res.end();
+        }
       }
       else
       {
@@ -38,7 +45,7 @@ export class App
     });
   }
 
-  public register(method: methodType, path: string, page: (req: IncomingMessage, res: ServerResponse) => void): void
+  public register(method: methodType, path: string, page: (req: IncomingMessage, res: ServerResponse) => Promise<void>): void
   {
     const url = `${method as string} /${this.version}${path}`;
     this.routeList[url] = page;
@@ -48,7 +55,14 @@ export class App
   {
     this.app.addListener('error', (err) =>
     {
-      console.error(JSON.stringify(err));
+      if (err.message === 'EADDRINUSE')
+      {
+        console.log('Address in use, retrying...');
+      }
+      else
+      {
+        console.error(JSON.stringify(err));
+      }
       process.exit(1);
     });
 

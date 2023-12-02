@@ -8,36 +8,35 @@ const log = Debug('app/page/database/update');
 
 const Db = new Database({
   name: 'testDb',
-  path: './data',
+  path: './data'
 });
 
 export const pageUpdateUniqueIdDatabase = async (_request: requestType, response: ServerResponse): Promise<void> =>
 {
   log('pageUpdateDatabase');
-  const test = await Db.updateById(
-    'testTable',
-    'test',
-    { testField: 'Update was run' }
-  );
-
-  if (test !== true)
+  try
   {
-    sendResponse(response, 200, {
-      ok: false,
-      description: '..:: Welcome ::..',
-      data: {
-        message: test.message
-      },
-    });
-  }
-  else
-  {
+    await Db.updateById(
+      'testTable',
+      { testField: 'Update was run' },
+      'test'
+    );
     sendResponse(response, 200, {
       ok: true,
       description: '..:: Welcome ::..',
       data: {
         status: 'testRecord update to testTable in test Db.'
-      },
+      }
+    });
+  }
+  catch (error)
+  {
+    sendResponse(response, 200, {
+      ok: false,
+      description: '..:: Welcome ::..',
+      data: {
+        message: (error as Error).message
+      }
     });
   }
 };

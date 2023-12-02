@@ -7,15 +7,16 @@
   "type": "module",
   "private": true,
   "dependencies": {
-    "debug": "^4.3.3",
+    "debug": "^4.3.4",
     "jsonwebtoken": "^8.5.1",
-    "tslib": "^2.2.0"
+    "tslib": "^2.4.0"
   },
   "devDependencies": {
     "@godgiven/database": "^0.4.0",
     "@godgiven/json-file": "^0.4.0",
     "@godgiven/type-server": "^0.4.0",
     "@godgiven/util": "^0.4.0",
+    "@godgiven/validator": "^0.2.4",
     "@types/debug": "^4.1.7",
     "@types/jsonwebtoken": "^8.5.8"
   }

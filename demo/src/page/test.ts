@@ -16,6 +16,6 @@ export const pageTest = async (_request: requestType, response: ServerResponse):
     data: {
       app: await bodyParser(_request),
       user: _request.server
-    },
+    }
   });
 };

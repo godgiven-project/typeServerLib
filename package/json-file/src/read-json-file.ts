@@ -1,32 +1,22 @@
-import { existsSync, promises as fs } from 'fs';
-import { resolve } from 'path';
-/**
- *
- */
-export async function readJsonFile<T extends Record<string | number, unknown>>(path: string): Promise<Error | T>
-{
-  // Check the path is exist
-  path = resolve(path);
-  if (!existsSync(path))
-  {
-    return new Error('NEXIST');
-  }
+import { promises as fs } from 'fs';
 
+/**
+ * Enhanced read json file.
+ *
+ * @example
+ * const fileContent = await readJsonFile('./file.json');
+ */
+export async function readJsonFile<T extends Record<string | number, unknown>>(path: string): Promise<T>
+{
   // Read file
-  return fs.readFile(path, { encoding: 'utf-8' }).then((fileContent) =>
+  const fileContent = await fs.readFile(path, { encoding: 'utf-8' });
+  // Parse object
+  try
   {
-    // Parse object
-    try
-    {
-      return JSON.parse(fileContent);
-    }
-    catch (err)
-    {
-      return new Error('invalid_json');
-    }
-  }).catch((e) =>
+    return JSON.parse(fileContent);
+  }
+  catch (err)
   {
-    // Handel error
-    return new Error(e.code);
-  });
+    throw new Error('invalid_json');
+  }
 }

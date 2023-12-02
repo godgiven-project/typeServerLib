@@ -1,4 +1,4 @@
-export type methodType = 'GET' | 'POST';
+export type methodType = 'GET' | 'POST' | 'DELETE' | 'PUT' | 'PATCH';
 
 export interface ApiResponseInterface
 {

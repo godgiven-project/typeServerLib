@@ -1,6 +1,6 @@
 import { createId } from '@godgiven/util/uuid.js';
 import { utcTimestamp } from '@godgiven/util/time.js';
-import { writeJsonFile, readJsonDirectory, readJsonFile } from '@godgiven/json-file';
+import { writeJsonFile, readJsonDirectory, readJsonFile, deleteJsonFile } from '@godgiven/json-file';
 
 // interface QueryType extends Record<string, string> {}
 
@@ -22,7 +22,7 @@ export class Database
   private readonly _scope: ScopeType;
 
   /**
-   * @param {Object} scope is config of database name and other salt.
+   * @param {object} scope is config of database name and other salt.
    */
   constructor(scope: ScopeType)
   {
@@ -33,35 +33,72 @@ export class Database
    * For insert record data to table of database
    *
    * @param {string} type similar the table and structure
-   * @param {Object} data data of Record
+   * @param {object} data data of Record
    * @param {string} id the unique reference for Record
    * @returns {true | Record<string, unknown>} `true` if the insert was successful Else return a `Error Object`
    */
-  async insert(type: string, data: Record<string, unknown>, id: string = createId()): Promise<true | Error>
+  async insert(
+    type: string,
+    data: Record<string, unknown>,
+    id: string = createId()
+  ): Promise<void>
   {
-    data._id = id;
-    data._modified = utcTimestamp();
-    data._created = utcTimestamp();
-    const file = await writeJsonFile(
-      `${this._scope.path}/${this._scope.name}/${type}/${id}.json`,
-      data,
-      false
-    );
-
-    if (file === true)
+    try
     {
-      return true;
+      await writeJsonFile(
+        `${this._scope.path}/${this._scope.name}/${type}/${id}.json`,
+        {
+          ...data,
+          _id: id,
+          _modified: utcTimestamp(),
+          _created: utcTimestamp()
+        },
+        false
+      );
     }
-    else
+    catch (error)
     {
-      if (file.message === 'EEXIST')
+      if ((error as Error).message === 'EEXIST')
       {
-        return new Error('Record is exist');
+        throw new Error('Record is exist');
       }
       else
       {
-        return new Error('Insert is not successful');
+        throw new Error('Insert is not successful');
       }
+    }
+  }
+
+  /**
+   * For save record data to table of database
+   *
+   * @param {string} type similar the table and structure
+   * @param {object} data data of Record
+   * @param {string} id the unique reference for Record
+   * @returns {true | Record<string, unknown>} `true` if the save was successful Else return a `Error Object`
+   */
+  async save(
+    type: string,
+    data: Record<string, unknown>,
+    id: string = createId()
+  ): Promise<void>
+  {
+    try
+    {
+      await writeJsonFile(
+        `${this._scope.path}/${this._scope.name}/${type}/${id}.json`,
+        {
+          ...data,
+          _id: id,
+          _modified: utcTimestamp(),
+          _created: utcTimestamp()
+        },
+        true
+      );
+    }
+    catch
+    {
+      throw new Error('Save is not successful');
     }
   }
 
@@ -72,12 +109,12 @@ export class Database
    */
   async findAll(type: string): Promise<Array<Record<string, unknown>>>
   {
-    const data = await readJsonDirectory(`${this._scope.path}/${this._scope.name}/${type}`);
-    if (!(data instanceof Error))
+    try
     {
+      const data = await readJsonDirectory(`${this._scope.path}/${this._scope.name}/${type}`);
       return data;
     }
-    else
+    catch (error)
     {
       return [];
     }
@@ -89,22 +126,21 @@ export class Database
    * @param {string} id the unique reference for Record
    * @returns
    */
-  async findById(type: string, id: string | number): Promise<Record<string, unknown> | Error>
+  async deleteById(type: string, id: string | number): Promise<void>
   {
-    const data = await readJsonFile(`${this._scope.path}/${this._scope.name}/${type}/${id}.json`);
-    if (!(data instanceof Error))
+    try
     {
-      return data;
+      await deleteJsonFile(`${this._scope.path}/${this._scope.name}/${type}/${id}.json`);
     }
-    else
+    catch (error)
     {
-      if (data.message === 'NEXIST')
+      if ((error as Error).message === 'NEXIST')
       {
-        return new Error('Record is not exist');
+        throw new Error('Record is not exist');
       }
       else
       {
-        return new Error(data.message);
+        throw error;
       }
     }
   }
@@ -113,47 +149,77 @@ export class Database
    *
    * @param {string} type similar the table and structure
    * @param {string} id the unique reference for Record
-   * @param {Record<string, unknown>} data any field that you want update
-   * @returns {true | Error} `true` if the update was successful Else return a `Error Object`
+   * @returns
    */
-  async updateById(type: string, id: string | number, data: Record<string, unknown>): Promise<true | Error>
+  async findById(type: string, id: string | number): Promise<Record<string, unknown>>
   {
-    const old = await readJsonFile(`${this._scope.path}/${this._scope.name}/${type}/${id}.json`);
-    if (!(old instanceof Error))
+    try
     {
-      data._modified = utcTimestamp();
-      const file = await writeJsonFile(
-        `${this._scope.path}/${this._scope.name}/${type}/${id}.json`,
-        {
-          ...old,
-          ...data
-        },
-        true
-      );
-
-      if (file === true)
-      {
-        return true;
-      }
-      else
-      {
-        return new Error('Update is not successful');
-      }
+      const data = await readJsonFile(`${this._scope.path}/${this._scope.name}/${type}/${id}.json`);
+      return data;
     }
-    else
+    catch (error)
     {
-      if (old.message === 'NEXIST')
+      if ((error as Error).message === 'NEXIST')
       {
-        return new Error('Record is not exist');
+        throw new Error('Record is not exist');
       }
       else
       {
-        return new Error(old.message);
+        throw error;
       }
     }
   }
 
-  // delete(_type: string, _query: QueryType): unknown
+  /**
+   *
+   * @param {string} type similar the table and structure
+   * @param {Record<string, unknown>} data any field that you want update
+   * @param {string} id the unique reference for Record
+   * @returns {true | Error} `true` if the update was successful Else return a `Error Object`
+   */
+  async updateById(
+    type: string,
+    data: Record<string, unknown>,
+    id: string | number
+  ): Promise<void>
+  {
+    try
+    {
+      const old = await readJsonFile(`${this._scope.path}/${this._scope.name}/${type}/${id}.json`);
+      data._modified = utcTimestamp();
+      try
+      {
+        await writeJsonFile(
+          `${this._scope.path}/${this._scope.name}/${type}/${id}.json`,
+          {
+            ...old,
+            ...data,
+            _id: id,
+            _modified: utcTimestamp()
+          },
+          true
+        );
+      }
+      catch
+      {
+        throw new Error('Update is not successful');
+      }
+    }
+    catch (error)
+    {
+      if ((error as Error).message === 'NEXIST')
+      {
+        throw new Error('Record is not exist');
+      }
+      else
+      {
+        throw error;
+      }
+    }
+  }
+
+  // delete(_type: string, _query: QueryType): unknown;
   // {
   //   return null;
   // }

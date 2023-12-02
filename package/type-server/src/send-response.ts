@@ -12,8 +12,13 @@ export const sendResponse = (response: ServerResponse, code: number, content: Ap
   {
     // content.apiVersion = getSignalValue('api')?.version ?? 'v1';
     response.statusCode = code;
-    response.setHeader('Access-Control-Allow-Origin', '*');
-    response.setHeader('Content-Type', 'application/json');
+    // response.setHeader('Access-Control-Allow-Origin', '*');
+    // response.setHeader('Content-Type', 'application/json');
+    response.writeHead(code, {
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json',
+      Server: 'Godgiven TypeMicroServer'
+    });
     response.end(JSON.stringify(content, undefined, 2));
   }
   catch (error)
