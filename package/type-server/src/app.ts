@@ -1,7 +1,8 @@
 import { createServer } from 'http';
 import { readFileSync } from 'fs';
 import { methodType } from './type.js';
-import { SignalInterface } from '@godgiven/signal';
+// import { SignalInterface } from '@godgiven/signal';
+// import { dispatchSignal } from '@godgiven/signal';
 import type { IncomingMessage, ServerResponse, Server } from 'http';
 import debug from 'debug';
 
@@ -18,7 +19,7 @@ declare global
   }
 }
 
-const versionSignal = new SignalInterface('api');
+// const versionSignal = new SignalInterface('api');
 
 export class App
 {
@@ -88,7 +89,9 @@ export class App
       showCover = showCover.replace('$2', 'Godgiven');
       showCover = showCover.replace('$3', 'https://github.com/godgiven-project');
       console.log(showCover);
-      versionSignal.dispatch({ version: this.version });
+      // void dispatchSignal('api', {
+      //   version: this.version
+      // });
     });
   }
 }

@@ -13,7 +13,8 @@ import {
   pageSaveUniqueIdDatabase,
   pageValidator,
   pageDeleteJsonFile,
-  pageDeleteUniqueIdDatabase
+  pageDeleteUniqueIdDatabase,
+  pageSignal
 } from './page/index.js';
 
 const app = new App();
@@ -34,6 +35,7 @@ app.register('GET', '/database-find-id', pageFindUniqueIdDatabase);
 app.register('GET', '/database-find-all', pageFindAllDatabase);
 app.register('GET', '/validator', pageValidator);
 app.register('GET', '/test', pageTest);
+app.register('GET', '/signal', pageSignal);
 app.register('GET', '', pageHome);
 
 app.listen();

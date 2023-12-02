@@ -4,7 +4,7 @@ export type ParamList = Record<string, string | number | boolean>;
 export interface Route
 {
   // href: https://example.com/product/100/book?cart=1&color=white#description
-  sectionList: Array<string | number | boolean>; // [product, 100, book]
+  sectionList: string[]; // [product, 100, book]
   queryParamList: ParamList; // {cart: 1, color: 'white'}
   hash: string; // '#description'
 }
@@ -17,7 +17,6 @@ export interface RequestRouteParam
   hash?: string;
   /**
    * Update browser history state (history.pushState or history.replaceState).
-   *
    * @default true
    */
   pushState?: boolean | 'replace';
@@ -29,17 +28,18 @@ export interface RequestRouteParam
 export interface InitOptions
 {
   /**
-   * A navigation trigger for Alwatr Router that translated clicks on `<a>` links into navigation signal.
+   * A navigation trigger for Godgiven Router that translated clicks on `<a>` links into navigation signal.
    *
    * Only regular clicks on in-app links are translated.
    * Only primary mouse button, no modifier keys, the target href is within the app's URL space.
-   *
    * @default true
    */
+  sectionBase?: string[];
+  sectionIndent?: number;
   clickTrigger?: boolean;
 
-  /* TODO: description */
   /**
+   * @TODO: description
    * @default true
    */
   popstateTrigger?: boolean;

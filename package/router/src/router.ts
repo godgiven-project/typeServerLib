@@ -1,12 +1,55 @@
-import { joinParameterList, routeSignalProvider } from './core.js';
-import { routeChangeSignal } from './signal.js';
+import { joinParameterList, updateBrowserHistory, _decodeURIComponent, splitParameterString } from './core.js';
+import { browserRouteChangeSignal, routeChangeSignal } from './signal.js';
 import { clickTrigger } from './trigger-click.js';
 import { popstateTrigger } from './trigger-popstate.js';
+import type { InitOptions, RequestRouteParam, Route, RoutesConfig } from './type.js';
+export type { Route, RoutesConfig } from './type.js';
 
-import type { InitOptions, Route, RoutesConfig, RequestRouteParam } from './type.js';
-import type { SignalInterface } from '@godgiven/signal';
+let sectionBase: string[] = [];
+let sectionIndent: number = 0;
 
-export { type Route, type RequestRouteParam, type RoutesConfig, routeChangeSignal };
+/**
+ * Make Route from RequestRouteParam.
+ */
+export function makeRouteObject(requestParam: RequestRouteParam): Route
+{
+  // logger.logMethodArgs('makeRouteObject', { requestParam });
+
+  requestParam.search ??= '';
+  requestParam.hash ??= '';
+
+  const sectionList = requestParam.pathname
+    .split('/')
+    .map(_decodeURIComponent) // decode must be after split because encoded '/' maybe include in values.
+    .filter((section) => section.trim() !== '');
+  return {
+    sectionList,
+    queryParamList: splitParameterString(requestParam.search.substring(1) /* remove first ? */),
+    hash: requestParam.hash
+  };
+}
+
+/**
+ *
+ */
+export function redirect(route: Partial<Route>): void
+{
+  const link = makeUrl(route);
+  const { pathname, search, hash } = new URL(`${window.location.origin}${link}`);
+  void browserRouteChangeSignal.dispatch({ pathname, search, hash });
+}
+
+/**
+ *
+ */
+export function routeSignalProvider(requestParam: RequestRouteParam): Route | void
+{
+  // logger.logMethodArgs('routeSignalProvider', { requestParam });
+  updateBrowserHistory(requestParam);
+  const object = makeRouteObject(requestParam);
+  object.sectionList = object.sectionList.slice(sectionIndent);
+  return object;
+}
 
 /**
  * Initial and config the Router.
@@ -16,18 +59,29 @@ function initial(options: InitOptions = {}): void
   options.clickTrigger ??= true;
   options.popstateTrigger ??= true;
 
+  options.sectionBase ??= [];
+  options.sectionIndent ??= 0;
+  if (options.sectionBase.length > 0)
+  {
+    sectionIndent = options.sectionBase.length;
+    sectionBase = options.sectionBase;
+  }
+  // logger.logMethodArgs('initialRouter', { options });
+
   clickTrigger.enable = options.clickTrigger;
   popstateTrigger.enable = options.popstateTrigger;
-
-  routeChangeSignal.setProvider(routeSignalProvider, { debounce: true, receivePrevious: true });
+  // browserRouteChangeSignal.dispatch(routeSignalProvider, { debounce: true });
+  browserRouteChangeSignal.addListener((route) =>
+  {
+    routeSignalProvider(route);
+  }, { receivePrevious: true });
 
   // first route request.
-  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-  if (!routeChangeSignal.dispatched)
+  if (routeChangeSignal.dispatched == null)
   {
     const { pathname, search, hash } = window.location;
     // Don't use `routeChangeSignal.request()` because we need set the route value immediately.
-    routeChangeSignal.dispatch(routeSignalProvider({ pathname, search, hash, pushState: false }), { debounce: false });
+    routeChangeSignal.dispatch((routeSignalProvider({ pathname, search, hash, pushState: false }) as Route), { debounce: false });
   }
 }
 
@@ -42,6 +96,8 @@ function initial(options: InitOptions = {}): void
  */
 function makeUrl(route: Partial<Route>): string
 {
+  // logger.logMethodArgs('makeUrl', { route });
+  route.sectionList = [...sectionBase, ...route.sectionList ?? []];
   let href = '';
 
   if (route.sectionList != null)
@@ -55,8 +111,7 @@ function makeUrl(route: Partial<Route>): string
     href += '?' + joinParameterList(route.queryParamList);
   }
 
-  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-  if (route.hash)
+  if (route.hash != null && route.hash !== '')
   {
     // != null && !== ''
     if (route.hash.indexOf('#') !== 0)
@@ -111,9 +166,12 @@ function makeUrl(route: Partial<Route>): string
  */
 function outlet(routesConfig: RoutesConfig): unknown
 {
+  // logger.logMethodArgs('outlet', { routesConfig });
+
   const currentRoute = routeChangeSignal.value;
   if (currentRoute == null)
   {
+    // logger.accident('outlet', 'route_not_initialized', 'Signal "route-change" not dispatched yet');
     return;
   }
 
@@ -122,10 +180,22 @@ function outlet(routesConfig: RoutesConfig): unknown
   if (page == null && currentRoute.sectionList.length === 0)
   {
     // root
+    // logger.incident(
+    //   'outlet',
+    //   'redirect_to_home',
+    //   'Route location is app root and routesConfig.map() return noting then redirect to home automatically'
+    // );
+
     page = 'home';
 
     if (typeof routesConfig.list[page]?.render !== 'function')
     {
+      // 'home' not defined!
+      // logger.accident('outlet', 'no_render_for_home', 'routesConfig.list["home"] not defined', {
+      //   page,
+      //   currentRoute,
+      //   routesConfig
+      // });
       routesConfig.list[page] = { render: () => 'Home Page!' };
     }
   }
@@ -133,12 +203,22 @@ function outlet(routesConfig: RoutesConfig): unknown
   if (page == null || typeof routesConfig.list[page]?.render !== 'function')
   {
     // 404
+    // logger.accident('outlet', 'redirect_to_404', 'Requested page not defined in routesConfig.list', {
+    //   page,
+    //   currentRoute,
+    //   routesConfig
+    // });
 
     page = '404';
 
     if (typeof routesConfig.list[page]?.render !== 'function')
     {
       // 404
+      // logger.accident('outlet', 'no_render_for_404', 'Page "404" not defined in routesConfig.list', {
+      //   page,
+      //   currentRoute,
+      //   routesConfig
+      // });
       routesConfig.list[page] = {
         render: () => 'Error 404: Page Not Found!'
       };
@@ -171,6 +251,5 @@ export const router = {
   /**
    * Signal interface of 'route-change' signal.
    */
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-  signal: routeChangeSignal as SignalInterface<'route-change'>
+  signal: routeChangeSignal
 } as const;

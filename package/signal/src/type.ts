@@ -3,17 +3,9 @@ declare global
   /**
    * Global signals value type registry.
    */
-  interface SignalNameList
+  interface SignalList
   {
     readonly 'easter-egg': string;
-  }
-
-  /**
-   * Global request signal parameters types.
-   */
-  interface RequestSignalNameList
-  {
-    readonly 'easter-egg': number;
   }
 }
 
@@ -90,21 +82,21 @@ export interface SignalProviderOptions
 /**
  * Signal listeners callback function type.
  */
-export type ListenerCallback<SignalName extends keyof SignalNameList> = (
-  signalValue: SignalNameList[SignalName]
+export type ListenerCallback<SignalName extends keyof SignalList> = (
+  signalValue: SignalList[SignalName]
 ) => void | Promise<void>;
 
 /**
  * Signal provider function type used to setSignalProvider.
  */
-export type SignalProvider<SignalName extends keyof RequestSignalNameList> = (
-  requestParam: RequestSignalNameList[SignalName]
-) => SignalNameList[SignalName] | void | Promise<SignalNameList[SignalName] | void>;
+// export type SignalProvider<SignalName extends keyof RequestSignalList> = (
+//   requestParam: RequestSignalList[SignalName]
+// ) => RequestSignalList[SignalName] | void | Promise<RequestSignalList[SignalName] | void>;
 
 /**
  * Signal listeners object in database.
  */
-export interface ListenerObject<SignalName extends keyof SignalNameList>
+export interface ListenerObject<SignalName extends keyof SignalList>
 {
   /**
    * Unique listener id
@@ -127,7 +119,7 @@ export interface ListenerObject<SignalName extends keyof SignalNameList>
 /**
  * Signal object in database.
  */
-export interface SignalObject<SignalName extends keyof SignalNameList>
+export interface SignalObject<SignalName extends keyof SignalList>
 {
   /**
    * Signal name for direct access.
@@ -137,7 +129,7 @@ export interface SignalObject<SignalName extends keyof SignalNameList>
   /**
    * Last dispatched value.
    */
-  value?: SignalNameList[SignalName];
+  value?: SignalList[SignalName];
 
   /**
    * If true, the signal is disabled.
@@ -160,5 +152,5 @@ export interface SignalObject<SignalName extends keyof SignalNameList>
  * Signal stack database.
  */
 export type SignalStack = {
-  [SignalName in keyof SignalNameList]?: SignalObject<SignalName>;
+  [SignalName in keyof SignalList]?: SignalObject<SignalName>;
 };

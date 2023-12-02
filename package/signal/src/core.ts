@@ -4,8 +4,8 @@ import type {
   ListenerObject,
   ListenerOptions,
   SignalObject,
-  SignalProvider,
-  SignalProviderOptions,
+  // SignalProvider,
+  // SignalProviderOptions,
   SignalStack
 } from './type.js';
 
@@ -29,7 +29,7 @@ const _signalStack: SignalStack = {};
  * signal.disabled = true;
  * ```
  */
-export function _getSignalObject<SignalName extends keyof SignalNameList>(
+export function _getSignalObject<SignalName extends keyof SignalList>(
   signalName: SignalName
 ): SignalObject<SignalName>
 {
@@ -48,12 +48,10 @@ export function _getSignalObject<SignalName extends keyof SignalNameList>(
 /**
  *
  */
-// eslint-disable-next-line @typescript-eslint/naming-convention
-function __callListeners<SignalName extends keyof SignalNameList>(signal: SignalObject<SignalName>): void
+function _callListeners<SignalName extends keyof SignalList>(signal: SignalObject<SignalName>): void
 {
   if (signal.value === undefined)
   {
-    // null is a valid value for signal.
     return;
   }
 
@@ -62,9 +60,19 @@ function __callListeners<SignalName extends keyof SignalNameList>(signal: Signal
     if (listener.disabled) { continue; }
     try
     {
-      void listener.callback(signal.value);
+      const ret = listener.callback(signal.value);
+      if (ret instanceof Promise)
+      {
+        // ret.catch((err) =>
+        // );
+      }
     }
-    catch {}
+    catch (err)
+    {
+      // logger.error('_callListeners', 'call_listener_failed', err, {
+      //   signalName: signal.name
+      // });
+    }
   }
 
   signal.listenerList
@@ -82,7 +90,7 @@ function __callListeners<SignalName extends keyof SignalNameList>(signal: Signal
  * const listener = _addSignalListener(signal, (content) => console.log(content));
  * ```
  */
-export function _addSignalListener<SignalName extends keyof SignalNameList>(
+export function _addSignalListener<SignalName extends keyof SignalList>(
   signal: SignalObject<SignalName>,
   listenerCallback: ListenerCallback<SignalName>,
   options: ListenerOptions = {}
@@ -112,19 +120,35 @@ export function _addSignalListener<SignalName extends keyof SignalNameList>(
       {
         void listenerCallback(signal.value);
       }
-      catch (err) {}
+      catch (err)
+      {
+        // logger.error('_addSignalListener', 'call_signal_callback_failed', err, {
+        //   signalName: signal.name
+        // });
+      }
       callbackCalled = true;
     }
     else if (options.receivePrevious === true)
     {
-      requestAnimationFrame(() =>
+      if (typeof process === 'undefined')
+      {
+        requestAnimationFrame(() =>
+        {
+          if (signal.value !== undefined)
+          {
+            // null is a valid value for signal.
+            void listenerCallback(signal.value);
+          }
+        });
+      }
+      else
       {
         if (signal.value !== undefined)
         {
           // null is a valid value for signal.
           void listenerCallback(signal.value);
         }
-      });
+      }
       callbackCalled = true; // must be outside of requestAnimationFrame.
     }
   }
@@ -156,11 +180,12 @@ export function _addSignalListener<SignalName extends keyof SignalNameList>(
  * _removeSignalListener(signal, listener);
  * ```
  */
-export function _removeSignalListener<SignalName extends keyof SignalNameList>(
+export function _removeSignalListener<SignalName extends keyof SignalList>(
   signal: SignalObject<SignalName>,
   listenerId: number
 ): void
 {
+  // logger.logMethodArgs('_removeSignalListener', { signalName: signal.name, listenerId });
   const listenerIndex = signal.listenerList.findIndex((_listener) => _listener.id === listenerId);
   if (listenerIndex !== -1)
   {
@@ -170,18 +195,19 @@ export function _removeSignalListener<SignalName extends keyof SignalNameList>(
 
 /**
  * Dispatch (send) signal to all listeners.
- *
  * @example
  * const signal = _getSignalObject('content-change')
  * _dispatchSignal(signal, content);
  */
-export function _dispatchSignal<SignalName extends keyof SignalNameList>(
+export function _dispatchSignal<SignalName extends keyof SignalList>(
   signal: SignalObject<SignalName>,
-  value: SignalNameList[SignalName],
+  value: SignalList[SignalName],
   options: DispatchOptions = {}
 ): void
 {
   options.debounce ??= true;
+
+  // logger.logMethodArgs('dispatchSignal', { signalName: signal.name, value, options });
 
   // set value before check signal.debounced for act like throttle (call listeners with last dispatch value).
   signal.value = value;
@@ -192,16 +218,24 @@ export function _dispatchSignal<SignalName extends keyof SignalNameList>(
   if (options.debounce !== true)
   {
     // call listeners immediately.
-    __callListeners(signal);
+    _callListeners(signal);
     return;
   }
   // else: call listeners in next frame.
   signal.debounced = true;
-  requestAnimationFrame(() =>
+  if (typeof process === 'undefined')
   {
-    __callListeners(signal);
+    requestAnimationFrame(() =>
+    {
+      _callListeners(signal);
+      signal.debounced = false;
+    });
+  }
+  else
+  {
+    _callListeners(signal);
     signal.debounced = false;
-  });
+  }
 }
 
 /**
@@ -223,32 +257,3 @@ export function _dispatchSignal<SignalName extends keyof SignalNameList>(
  * }
  * ```
  */
-export function _setSignalProvider<SignalName extends keyof SignalNameList>(
-  signal: SignalObject<SignalName>,
-  requestSignal: SignalObject<SignalName>,
-  signalProvider: SignalProvider<SignalName>,
-  options: SignalProviderOptions = {}
-): ListenerObject<SignalName>
-{
-  options.debounce ??= true;
-  options.receivePrevious ??= true;
-
-  if (requestSignal.listenerList.length > 0)
-  {
-    requestSignal.listenerList = [];
-  }
-
-  const _callback = async (requestParam: RequestSignalNameList[SignalName]): Promise<void> =>
-  {
-    const signalValue = await signalProvider(requestParam);
-    if (signalValue !== undefined)
-    {
-      // null is a valid value for signal.
-      _dispatchSignal(signal, signalValue, { debounce: options.debounce });
-    }
-  };
-
-  return _addSignalListener(requestSignal, _callback as unknown as ListenerCallback<SignalName>, {
-    receivePrevious: options.receivePrevious
-  });
-}

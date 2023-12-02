@@ -1,7 +1,7 @@
 import {
   _getSignalObject,
   _removeSignalListener,
-  _setSignalProvider,
+  // _setSignalProvider,
   _dispatchSignal,
   _addSignalListener
 } from './core.js';
@@ -10,22 +10,29 @@ import type {
   ListenerOptions,
   DispatchOptions,
   ListenerCallback,
-  SignalProvider,
-  SignalProviderOptions,
+  // SignalProvider,
+  // SignalProviderOptions,
   ListenerObject,
   SignalObject
 } from './type.js';
 
+export {
+  _dispatchSignal as dispatchSignal,
+  _addSignalListener as addSignalListener
+} from './core.js';
+
 /**
  * Signal API interface as a remote controller.
  */
-export class SignalInterface<SignalName extends keyof SignalNameList>
+export class SignalInterface<SignalName extends keyof SignalList>
 {
   protected _signal;
   protected _requestSignal;
+  // protected _logger;
 
   constructor(signalName: SignalName)
   {
+    // this._logger = createLogger(`signal<${signalName}>`);
     this._signal = _getSignalObject(signalName);
     this._requestSignal = _getSignalObject(`request-${signalName}` as unknown as SignalName);
   }
@@ -57,7 +64,7 @@ export class SignalInterface<SignalName extends keyof SignalNameList>
    * }
    * ```
    */
-  get value(): SignalNameList[SignalName] | undefined
+  get value(): SignalList[SignalName] | undefined
   {
     return this._signal.value;
   }
@@ -95,6 +102,7 @@ export class SignalInterface<SignalName extends keyof SignalNameList>
 
   set disabled(disabled: boolean)
   {
+    // this._logger.logProperty('disabled', disabled);
     this._signal.disabled = disabled;
   }
 
@@ -115,6 +123,7 @@ export class SignalInterface<SignalName extends keyof SignalNameList>
    */
   expire(): void
   {
+    // this._logger.logMethod('expire');
     delete this._signal.value;
   }
 
@@ -136,14 +145,15 @@ export class SignalInterface<SignalName extends keyof SignalNameList>
    * });
    * ```
    */
-  setProvider(
-    signalProvider: SignalProvider<SignalName>,
-    options?: SignalProviderOptions
-  ): ListenerInterface<SignalName>
-  {
-    const listener = _setSignalProvider(this._signal, this._requestSignal, signalProvider, options);
-    return new ListenerInterface(this._requestSignal, listener);
-  }
+  // setProvider(
+  //   signalProvider: SignalProvider<SignalName>,
+  //   options?: SignalProviderOptions
+  // ): ListenerInterface<SignalName>
+  // {
+  //   // this._logger.logMethodArgs('setProvider', { options });
+  //   const listener = _setSignalProvider(this._signal, this._requestSignal, signalProvider, options);
+  //   return new ListenerInterface(this._requestSignal, listener);
+  // }
 
   /**
    * Dispatch request signal and wait for answer (wait for new signal dispatched).
@@ -158,15 +168,16 @@ export class SignalInterface<SignalName extends keyof SignalNameList>
    * const newContent = await contentChangeSignal.request({foo: 'bar'});
    * ```
    */
-  request(requestParam: RequestSignalNameList[SignalName]): Promise<SignalNameList[SignalName]>
-  {
-    const nextSignalValuePromise = this.getNextSignalValue();
-    _dispatchSignal(
-      this._requestSignal,
-      requestParam as unknown as SignalNameList[SignalName] // mastmalize to avoid type error
-    );
-    return nextSignalValuePromise;
-  }
+  // request(requestParam: RequestSignalList[SignalName]): Promise<SignalList[SignalName]>
+  // {
+  //   // this._logger.logMethodArgs('request', { requestParam });
+  //   const nextSignalValuePromise = this.getNextSignalValue();
+  //   _dispatchSignal(
+  //     this._requestSignal,
+  //     requestParam as unknown as SignalList[SignalName] // mastmalize to avoid type error
+  //   );
+  //   return nextSignalValuePromise;
+  // }
 
   /**
    * Resolved with signal value when new signal received.
@@ -179,8 +190,9 @@ export class SignalInterface<SignalName extends keyof SignalNameList>
    * const newContent = await contentChangeSignal.getNextSignalValue();
    * ```
    */
-  getNextSignalValue(): Promise<SignalNameList[SignalName]>
+  getNextSignalValue(): Promise<SignalList[SignalName]>
   {
+    // this._logger.logMethod('getNextSignalValue');
     return new Promise((resolve) =>
     {
       this.addListener(resolve, {
@@ -204,8 +216,9 @@ export class SignalInterface<SignalName extends keyof SignalNameList>
    * const content = await contentChangeSignal.getSignalValue();
    * ```
    */
-  getSignalValue(): Promise<SignalNameList[SignalName]>
+  getSignalValue(): Promise<SignalList[SignalName]>
   {
+    // this._logger.logMethod('getSignalValue');
     if (this._signal.value !== undefined)
     {
       return Promise.resolve(this._signal.value);
@@ -226,8 +239,9 @@ export class SignalInterface<SignalName extends keyof SignalNameList>
    * contentChangeSignal.dispatch(content);
    * ```
    */
-  dispatch(signalValue: SignalNameList[SignalName], options?: DispatchOptions): void
+  dispatch(signalValue: SignalList[SignalName], options?: DispatchOptions): void
   {
+    // this._logger.logMethodArgs('dispatch', { signalValue, options });
     _dispatchSignal(this._signal, signalValue, options);
   }
 
@@ -246,6 +260,7 @@ export class SignalInterface<SignalName extends keyof SignalNameList>
     options?: ListenerOptions
   ): ListenerInterface<SignalName>
   {
+    // this._logger.logMethodArgs('addListener', { options });
     const listener = _addSignalListener(this._signal, listenerCallback, options);
     return new ListenerInterface(this._signal, listener);
   }
@@ -254,10 +269,12 @@ export class SignalInterface<SignalName extends keyof SignalNameList>
 /**
  * Signal Listener API interface as a remote controller.
  */
-export class ListenerInterface<SignalName extends keyof SignalNameList>
+export class ListenerInterface<SignalName extends keyof SignalList>
 {
+  // protected _logger;
   constructor(protected _signal: SignalObject<SignalName>, protected _listener: ListenerObject<SignalName>)
   {
+    // this._logger = createLogger('Listener of ' + _signal.name);
   }
 
   /**
@@ -278,6 +295,7 @@ export class ListenerInterface<SignalName extends keyof SignalNameList>
 
   set disabled(disabled: boolean)
   {
+    // this._logger.logProperty('disabled', disabled);
     this._listener.disabled = disabled;
   }
 
@@ -295,6 +313,7 @@ export class ListenerInterface<SignalName extends keyof SignalNameList>
    */
   remove(): void
   {
+    // this._logger.logMethod('remove');
     _removeSignalListener(this._signal, this._listener.id);
   }
 }

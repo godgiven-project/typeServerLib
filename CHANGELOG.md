@@ -3,11 +3,9 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.4.0 (2023-12-02)
+
 ## [0.3.1](https://github.com/godgiven-project/typeServerLib/compare/v0.3.0...v0.3.1) (2023-07-30)
-
-**Note:** Version bump only for package @godgiven/main
-
-# [0.3.0](https://github.com/godgiven-project/typeServerLib/compare/v0.2.4...v0.3.0) (2023-07-30)
 
 **Note:** Version bump only for package @godgiven/main
 
@@ -22,6 +20,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Features
 
 * body parser ([66aec5d](https://github.com/godgiven-project/typeServerLib/commit/66aec5d1547cb495d803922978fe2c1bd28b4f20))
+* exclude .d.ts ([11b147e](https://github.com/godgiven-project/typeServerLib/commit/11b147e5c7d8d2170bc7d3666817245edda6cbf0))
+* lerna and typeServer ([9319611](https://github.com/godgiven-project/typeServerLib/commit/9319611c8a75a9d1cec4fcf9f41b413d37d3edf4))
 * **deleteJsonFile:** init code ([f93b901](https://github.com/godgiven-project/typeServerLib/commit/f93b901b86d23677420ffd970fddd2cd346ae4dc))
 * **demo:** Add util page ([d078c99](https://github.com/godgiven-project/typeServerLib/commit/d078c992afaeae82773abfa63cb22ae5df411149))
 * exclude .d.ts ([11b147e](https://github.com/godgiven-project/typeServerLib/commit/11b147e5c7d8d2170bc7d3666817245edda6cbf0))
@@ -38,6 +38,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Features
 
 * body parser ([66aec5d](https://github.com/godgiven-project/typeServerLib/commit/66aec5d1547cb495d803922978fe2c1bd28b4f20))
+* exclude .d.ts ([11b147e](https://github.com/godgiven-project/typeServerLib/commit/11b147e5c7d8d2170bc7d3666817245edda6cbf0))
+* lerna and typeServer ([9319611](https://github.com/godgiven-project/typeServerLib/commit/9319611c8a75a9d1cec4fcf9f41b413d37d3edf4))
 * **deleteJsonFile:** init code ([f93b901](https://github.com/godgiven-project/typeServerLib/commit/f93b901b86d23677420ffd970fddd2cd346ae4dc))
 * **demo:** Add util page ([d078c99](https://github.com/godgiven-project/typeServerLib/commit/d078c992afaeae82773abfa63cb22ae5df411149))
 * exclude .d.ts ([11b147e](https://github.com/godgiven-project/typeServerLib/commit/11b147e5c7d8d2170bc7d3666817245edda6cbf0))

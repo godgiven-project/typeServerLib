@@ -1,16 +1,17 @@
-import { routeChangeSignal } from './signal.js';
+// import { logger } from './core.js';
+import { browserRouteChangeSignal } from './signal.js';
 
 let _enabled = false;
 
 /**
- * A navigation trigger for Alwatr Router that translated clicks on `<a>` links into navigation signal.
+ * A navigation trigger for Godgiven Router that translated clicks on `<a>` links into navigation signal.
  *
  * Only regular clicks on in-app links are translated.
  * Only primary mouse button, no modifier keys, the target href is within the app's URL space.
  */
 export const clickTrigger = {
   /**
-   * Alwatr router global click handler.
+   * Godgiven router global click handler.
    */
   _clickHandler(event: MouseEvent): void
   {
@@ -72,11 +73,7 @@ export const clickTrigger = {
 
     // if none of the above, convert the click into a navigation signal.
     const { pathname, search, hash } = anchor;
-    void routeChangeSignal.request({
-      pathname,
-      search,
-      hash
-    });
+    void browserRouteChangeSignal.dispatch({ pathname, search, hash });
     // for a click event, the scroll is reset to the top position.
     if (event.type === 'click')
     {
@@ -86,6 +83,8 @@ export const clickTrigger = {
 
   set enable(enable: boolean)
   {
+    // logger.logProperty('clickTrigger.enable', enable);
+
     if (enable && !_enabled)
     {
       window.document.addEventListener('click', clickTrigger._clickHandler);
