@@ -42,7 +42,7 @@ export function redirect(route: Partial<Route>): void
 /**
  *
  */
-export function routeSignalProvider(requestParam: RequestRouteParam): Route | void
+export function routeSignalProvider(requestParam: RequestRouteParam): Route
 {
   // logger.logMethodArgs('routeSignalProvider', { requestParam });
   updateBrowserHistory(requestParam);
@@ -73,15 +73,15 @@ function initial(options: InitOptions = {}): void
   // browserRouteChangeSignal.dispatch(routeSignalProvider, { debounce: true });
   browserRouteChangeSignal.addListener((route) =>
   {
-    routeSignalProvider(route);
+    routeChangeSignal.dispatch((routeSignalProvider(route)), { debounce: true });
   }, { receivePrevious: true });
 
   // first route request.
-  if (routeChangeSignal.dispatched == null)
+  if (routeChangeSignal.dispatched === false)
   {
     const { pathname, search, hash } = window.location;
     // Don't use `routeChangeSignal.request()` because we need set the route value immediately.
-    routeChangeSignal.dispatch((routeSignalProvider({ pathname, search, hash, pushState: false }) as Route), { debounce: false });
+    routeChangeSignal.dispatch((routeSignalProvider({ pathname, search, hash, pushState: false })), { debounce: false });
   }
 }
 

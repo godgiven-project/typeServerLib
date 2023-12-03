@@ -1,11 +1,11 @@
 {
   "name": "@godgiven/router",
-  "version": "0.4.1",
+  "version": "0.4.3",
   "description": "Typescript/Javascript route handler",
-  "main": "router.ts",
+  "main": "router.js",
   "author": "Godgiven",
   "type": "module",
-  "types": "index.d.ts",
+  "types": "router.d.ts",
   "license": "Apache-2.0",
   "dependencies": {
     "@godgiven/signal": "^0.4.0",
